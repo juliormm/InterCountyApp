@@ -7,3 +7,38 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+.inline-brands {
+	margin-left: 10px;
+}
+
+.store-box {
+	max-height: 500px;
+	overflow: auto;
+}
+
+.icon-logo{
+	max-width: 75px;
+}
+
+.store-list-container
+{
+	.list-group {
+		margin-bottom:0;
+	}
+
+	.well.new-item {
+		background-color:#dff0d8;
+	}
+	
+}
+
+.bottom-spacer {
+	margin-bottom:20px;
+}
+
+.form-location{
+	margin-bottom:20px;
+}
+

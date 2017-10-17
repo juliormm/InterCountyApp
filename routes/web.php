@@ -12,9 +12,46 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
-Auth::routes();
+// Auth::routes();
+
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// // Registration Routes...
+// Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/campaigns', 'CampaignController@index');
+Route::get('/campaigns/{id}', 'CampaignController@show');
+Route::get('/campaigns/create', 'CampaignController@create');
+Route::get('/campaigns/{id}/edit', 'CampaignController@edit');
+
+
+Route::get('/stores', 'StoreController@index')->name('store-list');;;
+Route::get('/stores/{id}/edit', 'StoreController@edit');
+Route::get('/stores/create', 'StoreController@create');
+Route::put('/stores/{id}', 'StoreController@update')->name('store.update');;
+
+
+// Route::get('/stores/{id}', 'StoreController@show');
+
+
+
+Route::post('/stores', 'StoreController@store');
+
+
