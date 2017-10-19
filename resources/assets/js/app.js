@@ -281,7 +281,7 @@ function handleStores(dataObj, url) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var posting = $.post(url, dataObj, function(data) {
+    var posting = $.post(appURL+url, dataObj, function(data) {
 
     		// showURLBox(dataObj['store'], dataObj['brand']);
             // console.log();

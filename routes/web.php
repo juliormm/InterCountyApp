@@ -23,8 +23,8 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // // Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+// Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('register', 'Auth\RegisterController@register');
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -48,8 +48,8 @@ Route::post('/campaigns/{id}/remove/store', 'CampaignController@removeStore');
 Route::get('/stores', 'StoreController@index')->name('store-list');;;
 Route::get('/stores/{id}/edit', 'StoreController@edit');
 Route::get('/stores/create', 'StoreController@create');
-Route::put('/stores/{id}', 'StoreController@update')->name('store.update');;
-Route::post('/stores', 'StoreController@store');
+Route::put('/stores/{id}', 'StoreController@update')->name('store.update');
+Route::post('/stores', 'StoreController@store')->name('store.new');
 
 
 // Route::get('/campaign/')

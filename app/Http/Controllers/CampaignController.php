@@ -42,6 +42,7 @@ class CampaignController extends Controller
         JavaScript::put([
             'dData'     => $campaignData,
             'brandList' => $brandList,
+            'appURL' => env("APP_URL", "http://localhost")
         ]);
         return view('campaign-edit', compact('currentCampaign', 'campaignData', 'brandList'));
     }

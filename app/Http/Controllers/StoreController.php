@@ -32,9 +32,10 @@ class StoreController extends Controller
 
     public function create()
     {
+        
 
         $store = new Store;
-        $formURL = '/stores';
+        $formURL = url('/stores');
 
         $location = new Location;
 
@@ -44,7 +45,7 @@ class StoreController extends Controller
     public function edit($id)
     {
         $store = Store::find($id);
-        $formURL = '/stores/'.$id;
+        $formURL = url('/stores/'.$id);
     	return view('stores.store-form', compact('store', 'formURL'));
     }
 

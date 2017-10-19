@@ -1,14 +1,12 @@
 <h3 class="text-center">Edit Campaign</h3>
 <div class="well">
 	<ul>
-		<li>Select store to add be inlcuded in this campaign.</li>
+		<li>Select store to be inlcuded in this campaign.</li>
 		<li>Select brands and insert brand exit url</li>
 	</ul>
 	
-	
-
 </div>
-<div class="store-box">
+<div class="scroll-content-box">
   <ul class="list-group">
     @foreach ($storeList as $storeKey => $store)
       <li class="list-group-item checkbox" style="cursor: pointer;" id="store_{{ $storeKey }}">
