@@ -15,7 +15,7 @@
              @foreach ($brandList as $key => $brand)
              <div class="checkbox inline-brands">
                 <label>
-                 @if ($storesSelected->where('id', $key)->first())
+                 @if ($campaignData->where('id', $key)->first())
                    <input type="checkbox"> {{ $brand }}
                   @else
                      <input type="checkbox"> {{ $brand }}

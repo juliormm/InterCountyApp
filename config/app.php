@@ -178,8 +178,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Geocoder\Laravel\Providers\GeocoderService::class,
-
+        Alexpechkarev\GoogleGeocoder\GoogleGeocoderServiceProvider::class,
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class
+        // Geocoder\Laravel\Providers\GeocoderService::class,
     ],
 
     /*

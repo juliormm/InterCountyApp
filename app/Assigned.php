@@ -11,7 +11,7 @@ class Assigned extends Model
 {
 
 	protected $table = 'assigned';
-
+    public $timestamps = false;
 
     public function stores()
     {
@@ -27,4 +27,5 @@ class Assigned extends Model
     {
         return $this->hasMany(Campaign::class);
     }
+    
 }

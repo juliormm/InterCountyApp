@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Assigned;
+use App\Brand;
 use App\Campaign;
 use App\Store;
+use DB;
+use Illuminate\Http\Request;
+use JavaScript;
 
 class CampaignController extends Controller
 {
-    
-	/**
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -19,43 +23,74 @@ class CampaignController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
-    	$campaignList = Campaign::all()->pluck('name', 'id');
+        $campaignList = Campaign::all()->pluck('name', 'id');
         return view('campaign-list', compact('campaignList'));
-    }
-
-    public function show()
-    {
-
-    }
-
-    public function create()
-    {
-
-        return [];
     }
 
     public function edit($id)
     {
         $currentCampaign = $id;
-        $storesSelected = Campaign::find($id)->assignedStores()->distinct()->get();
+        $brandList       = Brand::orderBy('name', 'asc')->pluck('name', 'id');
+        $uStores         = DB::table('assigned')->where('campaign_id', '=', $id)->get();
+        $grouped         = $uStores->groupBy('store_id');
+        $campaignData    = $grouped->map(function ($arr, $key) {
+            return $arr->pluck('exit_url', 'brand_id');
+        });
 
-        // $storesSelected = Campaign::with(['assignedStores' => function($query) use ($id){
-        //     $query->where('campaign_id', '=', $id);
-        // }])->distinct()->get();
+        JavaScript::put([
+            'dData'     => $campaignData,
+            'brandList' => $brandList,
+        ]);
+        return view('campaign-edit', compact('currentCampaign', 'campaignData', 'brandList'));
+    }
 
-        // $final = [];
-
-        foreach ($storesSelected as $store) {
-            $store->load(['assignedBrands' => function ($query) use ($id){
-                $query->where('campaign_id', '=', $id);
-            }]);
+    public function removeStore(Request $request, $id)
+    {
+        $resp = ['status' => 'ok'];
+        if ($request->action == 'clearAll') {
+            $ids = Assigned::where(['campaign_id' => $id, 'store_id' => $request->store])->pluck('id');
+            if (!empty($ids)) {
+                $resp['message'] = 'store removed';
+                Assigned::destroy($ids->toArray());
+            } else {
+                $resp['message'] = 'nothing was found';
+            }
+            
         }
-        // $test = Campaign::width('assignedStores.')->assignedStores()->distinct()->get();
 
+        return $resp;
 
-        return view('campaign-edit', compact('currentCampaign', 'storesSelected') );
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validate = Assigned::where(['campaign_id' => $id, 'store_id' => $request->store, 'brand_id' => $request->brand])->value('id');
+
+        $resp = ['status' => $validate];
+        if (!empty($validate) && $request->action == 'remove') {
+            $resp = ['status' => 'record deleted'];
+            $status = Assigned::destroy($validate);
+            $resp['message'] = 'record deleted';
+        } elseif (!empty($validate) && $request->action == 'urlexit' && $request->has('url')) {
+            $resp['message'] = 'url updated';
+            $row = Assigned::find($validate);
+            $row->exit_url = $request->url;
+            $row->save();
+        } elseif (empty($validate) && $request->action == 'add') {
+            $row              = new Assigned;
+            $row->campaign_id = $id;
+            $row->store_id    = $request->store;
+            $row->brand_id    = $request->brand;
+            $row->save();
+            $resp['message'] = 'record added';
+            $resp['data']    = $row->id;
+        } else {
+            $resp['message'] = 'not sure what happend';
+        }
+
+        return $resp;
+
     }
 }

@@ -8,7 +8,7 @@ use App\Http\Requests\StoreForm;
 use App\Store;
 use App\Location;
 
-use Geocoder\Query\GeocodeQuery;
+// use Geocoder\Laravel\Facades\Geocoder;
 
 
 class StoreController extends Controller
@@ -48,14 +48,17 @@ class StoreController extends Controller
     	return view('stores.store-form', compact('store', 'formURL'));
     }
 
-    public function update(Request $request, $id){
-   		return $request;
+    private function getCoordinates($address) {
+        $param = array("address"=>$address);
+        $geocode = \Geocoder::geocode('json', $param);
+        $arr = json_decode($geocode, true);
+        $coordinates = $arr['results'][0]['geometry']['location'];
+
+        return $coordinates;
     }
 
-    public function store(Request $request) {
-      
-        // return $request->input('locaction');
-        
+    public function update(Request $request, $id){
+
         $request->validate([
             'name' => 'required',
             'default_phone' => 'required',
@@ -63,27 +66,88 @@ class StoreController extends Controller
             'locaction.1.phone' => 'required'
         ]);
 
-        // $store = new Store;
-        // $store->name = $request->input('name');
-        // // $store->logo = $request->input('logo');
-        // $store->default_phone = $request->input('default_phone');
-        // $store->save();
 
-        $temp = [];
+        $store = Store::find($id);
+        $store->name = $request->input('name');
+        $store->default_phone = $request->input('default_phone');
+        $store->save();
+
+        foreach ($request->input('locaction') as $key => $value) {
+
+            $locID = $value['id']; 
+            $address = (!empty($value['address'])) ? $value['address'] : null;
+            $phone = (!empty($value['phone'])) ? $value['phone'] : null;
+
+            if(empty($address) && empty($phone)) {
+                if($locID != 'new') {
+                    Location::destroy($locID);
+                }
+                
+            } else if( !empty($address) && !empty($phone) ){
+
+                if($locID == 'new') {
+                    $coordinates = $this->getCoordinates($address);
+                    $newLocation = new Location;
+                    $newLocation->address = $address;
+                    $newLocation->phone = $phone;
+                    $newLocation->latitude = $coordinates['lat'];
+                    $newLocation->longitude = $coordinates['lng'];
+                    $newLocation->store_id = $id;
+                    $newLocation->save();
+               } else {
+                    if(!empty($address) && !empty($phone)) {
+                        $loc = Location::find($locID);
+                        
+                        if($loc->address != $address){
+                            $coordinates =  $this->getCoordinates($address);
+                            $loc->latitude = $coordinates['lat'];
+                            $loc->longitude = $coordinates['lng'];
+                        }
+
+                        $loc->address =  $address;
+                        $loc->phone =   $phone;
+                        $loc->save();
+                    }
+               }
+
+            }
+        }
+
+
+   		return redirect('/stores')->with(['status' => $request->input('name') . ' was updated!', 'new_id' => $store->id]);
+    }
+
+    public function store(Request $request) {
+              
+        $request->validate([
+            'name' => 'required',
+            'default_phone' => 'required',
+            'locaction.1.address' => 'required',
+            'locaction.1.phone' => 'required'
+        ]);
+
+        $store = new Store;
+        $store->name = $request->input('name');
+        $store->default_phone = $request->input('default_phone');
+        $store->save();
+
         foreach ($request->input('locaction') as $key => $value) {
 
             $address = (!empty($value['address'])) ? $value['address'] : null;
             $phone = (!empty($value['phone'])) ? $value['phone'] : null;
            
            if(!empty($address) && !empty($phone)) {
+            $coordinates =  $this->getCoordinates($address);
             $newLocation = new Location;
             $newLocation->address = $address;
             $newLocation->phone = $phone;
-            // array_push($temp, [$address, $phone] );
+            $newLocation->latitude = $coordinates['lat'];
+            $newLocation->longitude = $coordinates['lng'];
+            $newLocation->store_id = $store->id;
+            $newLocation->save();
            }
         }
 
-        return $temp;
-       // return redirect('/stores')->with(['status' => $request->input('name') . ' was added!', 'new_id' => $store->id]);
+       return redirect('/stores')->with(['status' => $request->input('name') . ' was added!', 'new_id' => $store->id]);
     }
 }

@@ -6,18 +6,20 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row" id="campaign-edit">
         
-		<div class="col-sm-6">
+		<div class="col-sm-12" id="campaign-stores">
 			@include('layouts.store-check')
 		</div>
-		<div class="col-sm-6">
+{{-- 		<div class="col-sm-6">
 			@include('layouts.store-brands')
-		</div>
+		</div> --}}
     </div>
 </div>
 
-{{-- <example-component></example-component> --}}
+{{-- {{ dump( $campaignData ) }} --}}
+
+{{-- <store-brand-component v-bind:stores="dData"></store-brand-component> --}}
 
 @endsection
 

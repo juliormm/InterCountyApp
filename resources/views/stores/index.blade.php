@@ -20,8 +20,13 @@
 					<div class="col-sm-4"> 
 						<div class="media">
 						  <div class="media-left">
+							@if (empty($store->logo))
+								ask admin to insert logo
+							@else
+								<img class="media-object icon-logo" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/InterCountyColumbusDay2017_17-0918/logos/{{ $store->logo }}" alt="logo">
+							@endif
+						      
 
-						      <img class="media-object icon-logo" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/InterCountyColumbusDay2017_17-0918/logos/{{ $store->logo }}" alt="logo">
 						  </div>
 						  <div class="media-body">
 
@@ -51,8 +56,6 @@
 
 
 </div>
-
-{{-- <example-component></example-component> --}}
 
 @endsection
 

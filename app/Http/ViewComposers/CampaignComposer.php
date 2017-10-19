@@ -5,6 +5,7 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use App\Store;
 use App\Brand;
+use JavaScript;
 
 class CampaignComposer
 {
@@ -25,8 +26,16 @@ class CampaignComposer
     public function __construct()
     {
         // Dependencies automatically resolved by service container...
-        $this->stores = Store::orderBy('name')->get()->pluck('name', 'id');
-        $this->brands = Brand::orderBy('name')->get()->pluck('name', 'id');
+         $storeData = Store::orderBy('name','asc')->pluck('name','id');
+        // $brandData = Brand::orderBy('name', 'asc')->pluck('name','id');
+
+        $this->stores = $storeData;
+         // $this->brands = $brandData;
+
+         // JavaScript::put([
+         //        'storeList' => $this->stores,
+         //        'brandList' => $this->brands
+         // ]);
     }
 
     /**
@@ -37,6 +46,6 @@ class CampaignComposer
      */
     public function compose(View $view)
     {
-        $view->with(['storeList'=> $this->stores, 'brandList' => $this->brands]);
+        $view->with(['storeList'=> $this->stores]);
     }
 }

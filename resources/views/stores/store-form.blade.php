@@ -4,10 +4,11 @@
 @endsection 
 
 @section('content')
-    <div class="container">
-        <div class="row">
-        	<div class="col-sm-12">
+    <div class="container page">
+        
         		<form method="POST" action="{{ $formURL }}" accept-charset="UTF-8">
+        		<div class="row">
+        	<div class="col-sm-12">
 		        {{ csrf_field() }}
 		        @if (!Request::is('stores/create') )
 		        	{{ method_field('PUT') }} 
@@ -30,10 +31,11 @@
 		                <label for="logo">Logo file name</label>
 		                <input class="form-control" placeholder="myStoreLogo.png" name="logo" type="text" value="{{ old('logo',$store->logo) }}">
 		            </div> --}}
-		            <div class="jumbotron">
+		            {{-- <div class="well"> --}}
 							@for ($i = 0; $i < 5; $i++)
-								<div class="well well-sm">
+								<div class="well">
 				                    <h3>Location {{ $i + 1 }}</h3>
+				                    <input type="hidden" name="locaction[{{ $i + 1  }}][id]" value="{{ (!empty($store->locations->get($i, null) ) ) ? $store->locations->get($i)->id : 'new' }}">
 				                    <div class="form-group">
 				                        <label for="logo">Address</label>
 				                        <input class="form-control" placeholder="location address" name="locaction[{{ $i + 1  }}][address]" type="text" value="{{ old('address', (!empty($store->locations->get($i, null) ) ) ? $store->locations->get($i)->address : '' ) }}">
@@ -45,12 +47,12 @@
 				                </div>
 
 							@endfor
-		            </div>
+		            {{-- </div> --}}
 		            <button class="btn btn-success" type="submit">Save Store</button>
-		           
-	        	</form>
-	        </div>
+		                </div>
         </div>
+	        	</form>
+	   
     </div>
 
 @endsection

@@ -12,7 +12,7 @@ class Store extends Model
 {
 	public $timestamps = false;
 	protected $fillable = ['name', 'logo', 'default_phone'];
-    protected $with = ['locations'];
+    // protected $with = ['locations'];
 
     public function locations()
     {
