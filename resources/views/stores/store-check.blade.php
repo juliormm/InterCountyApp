@@ -6,8 +6,6 @@
     </ul>
 </div>
 
-{{-- {{ dump($storeList) }} --}}
-
 <div id="store-list-campaign" class="scroll-content-box">
     <ul class="list-group">
         @foreach ($storeList as $store)
@@ -15,8 +13,6 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="logo-thumb">
-
-                       
                         <img class="logo-img" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/store_logos/{{ $store->logo }}" alt="logo">
                     </div>
                     <div class="form-inline store-section">
@@ -54,12 +50,11 @@
         @endforeach
     </ul>
     <div class="loading-blocker">
-        
         <div class="spinner spinner--blue">
             <div class="spinner__item1"></div>
             <div class="spinner__item2"></div>
             <div class="spinner__item3"></div>
             <div class="spinner__item4"></div>
-        </div> 
+        </div>
     </div>
 </div>
