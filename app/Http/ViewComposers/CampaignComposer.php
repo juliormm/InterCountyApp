@@ -26,7 +26,7 @@ class CampaignComposer
     public function __construct()
     {
         // Dependencies automatically resolved by service container...
-         $storeData = Store::orderBy('name','asc')->pluck('name','id');
+         $storeData = Store::orderBy('name','asc')->get();
         // $brandData = Brand::orderBy('name', 'asc')->pluck('name','id');
 
         $this->stores = $storeData;

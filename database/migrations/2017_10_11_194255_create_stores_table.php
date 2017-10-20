@@ -18,6 +18,7 @@ class CreateStoresTable extends Migration
             $table->string('name');
             $table->string('logo')->nullable();
             $table->string('default_phone');
+            $table->integer('ic_dealer_id');
 
         });
     }

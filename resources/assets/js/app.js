@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 // import VueRouter  from 'vue-router'
 // import router     from './router'
@@ -92,9 +92,9 @@ window.Vue = require('vue');
 
 // Vue.component('store-brand-component', require('./components/StoreBrand.vue'));
 
-const app = new Vue({
-    el: '#app'
-});
+// const app = new Vue({
+//     el: '#app'
+// });
 // 
 // const NotFound = { template: '<p>Page not found</p>' }
 // const Home = { template: '<p>home page</p>' }
@@ -126,26 +126,44 @@ $(document).ready(function() {
     // console.log(brandList);
     if ($("#campaign-edit").length > 0) {
         // console.log('running');
+        const blocker = $(".loading-blocker");
+        blocker.show();
 
         $("#campaign-stores ul li").each(function(index) {
             const liStore = $(this);
             const storeID = this.id.replace("store_", "");
             const storeInput = $(".store-item", this);
             const brandBox = $(".brand-box", this);
+
+            if ( $( '#creativeID_'+storeID ).length ){
+                const creativeID = $( '#creativeID_'+storeID );
+                
+                if(hyfn.dData[storeID]){
+                    creativeID.val(hyfn.dData[storeID].creative_id);
+                }
+                
+                creativeID.on("focusout", function() {
+                    if(storeInput.prop("checked")){
+                        const send = { store: storeID, campaign: 1, creative: $(this).val() };
+                        handleStores(send, '/tracking');
+                    }
+                });
+            }
+
             // check store
-            if (dData[storeID]) {
+            if (hyfn.dData[storeID]) {
                 storeInput.prop("checked", true);
-                activateBrands(brandBox, dData[storeID]);
+                activateBrands(brandBox, hyfn.dData[storeID]);
 
                 liStore.addClass('selected');
                 brandBox.removeClass('hidden');
 
-                autoCheckBrands(brandBox, dData[storeID]);
+                autoCheckBrands(brandBox, hyfn.dData[storeID]);
             }
 
             storeInput.change(function() {
-                if (!dData.hasOwnProperty(storeID)) {
-                    dData[storeID] = []
+                if (!hyfn.dData.hasOwnProperty(storeID)) {
+                    hyfn.dData[storeID] = []
                 }
 
                 if (this.checked) {
@@ -154,7 +172,7 @@ $(document).ready(function() {
                     liStore.addClass('selected');
 
                 } else {
-                    dData[storeID] = []
+                    hyfn.dData[storeID] = []
                     brandBox.addClass('hidden');
                     liStore.removeClass('selected');
                     const warning = brandBox.find('.brand-warning');
@@ -165,6 +183,8 @@ $(document).ready(function() {
                 }
             });
         });
+
+        blocker.hide();
     } else {
         console.log('other');
     }
@@ -196,9 +216,9 @@ function autoCheckBrands(parent, data) {
         const brandID = $(chkBox).data('brand-id');
         const storeID = $(chkBox).data('store-id');
         // console.log(chkBox.prop("checked"));
-        if (data.hasOwnProperty(brandID)) {
+        if (data.brand.hasOwnProperty(brandID)) {
             chkBox.prop("checked", true);
-            urlBox.val(data[brandID]);
+            urlBox.val(data.brand[brandID]);
             // $(urlBox).value(data[brandID]);
             showURLBox(storeID, brandID)
             warning.addClass('hidden');
@@ -281,7 +301,7 @@ function handleStores(dataObj, url) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var posting = $.post(appURL+url, dataObj, function(data) {
+    var posting = $.post(hyfn.appURL+url, dataObj, function(data) {
 
     		// showURLBox(dataObj['store'], dataObj['brand']);
             // console.log();

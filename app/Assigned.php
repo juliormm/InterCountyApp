@@ -27,5 +27,7 @@ class Assigned extends Model
     {
         return $this->hasMany(Campaign::class);
     }
+
+    
     
 }

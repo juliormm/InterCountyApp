@@ -14,13 +14,13 @@ class CreateTrackingTable extends Migration
     public function up()
     {
         Schema::create('tracking', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
             $table->integer('creative_id');
             $table->integer('store_id');
             $table->integer('campaign_id');
             $table->integer('next_brand')->default(1);
             $table->integer('impressions')->default(0);
-            $table->timestamps();
+            $table->unique(['campaign_id', 'store_id']);
         });
     }
 

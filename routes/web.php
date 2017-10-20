@@ -52,5 +52,8 @@ Route::put('/stores/{id}', 'StoreController@update')->name('store.update');
 Route::post('/stores', 'StoreController@store')->name('store.new');
 
 
+Route::post('/tracking', 'TrackingController@store')->name('tracking');
+
+
 // Route::get('/campaign/')
 

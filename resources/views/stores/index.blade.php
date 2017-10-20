@@ -23,7 +23,7 @@
 							@if (empty($store->logo))
 								ask admin to insert logo
 							@else
-								<img class="media-object icon-logo" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/InterCountyColumbusDay2017_17-0918/logos/{{ $store->logo }}" alt="logo">
+								<img class="media-object icon-logo" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/store_logos/{{ $store->logo }}" alt="logo">
 							@endif
 						      
 

@@ -9,7 +9,7 @@
     <div class="row" id="campaign-edit">
         
 		<div class="col-sm-12" id="campaign-stores">
-			@include('layouts.store-check')
+			@include('stores.store-check')
 		</div>
 {{-- 		<div class="col-sm-6">
 			@include('layouts.store-brands')

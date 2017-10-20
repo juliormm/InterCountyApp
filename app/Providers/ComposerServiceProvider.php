@@ -15,7 +15,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
-            'campaign-edit', 'App\Http\ViewComposers\CampaignComposer'
+            'campaign.campaign-edit', 'App\Http\ViewComposers\CampaignComposer'
         );
 
         // // Using Closure based composers...

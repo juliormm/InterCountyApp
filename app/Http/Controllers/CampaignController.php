@@ -6,6 +6,7 @@ use App\Assigned;
 use App\Brand;
 use App\Campaign;
 use App\Store;
+use App\Tracking;
 use DB;
 use Illuminate\Http\Request;
 use JavaScript;
@@ -35,8 +36,13 @@ class CampaignController extends Controller
         $brandList       = Brand::orderBy('name', 'asc')->pluck('name', 'id');
         $uStores         = DB::table('assigned')->where('campaign_id', '=', $id)->get();
         $grouped         = $uStores->groupBy('store_id');
+
         $campaignData    = $grouped->map(function ($arr, $key) {
-            return $arr->pluck('exit_url', 'brand_id');
+           $cID =  $arr->pluck('campaign_id')[0];
+            $track = Tracking::where('campaign_id', $cID)->where('store_id', $key)->first();
+            $crvID = ($track) ? $track->creative_id : '';
+            $ret = ['creative_id' => $crvID, 'brand' => $arr->pluck('exit_url', 'brand_id')];
+            return $ret;
         });
 
         JavaScript::put([
@@ -44,7 +50,7 @@ class CampaignController extends Controller
             'brandList' => $brandList,
             'appURL' => env("APP_URL", "http://localhost")
         ]);
-        return view('campaign-edit', compact('currentCampaign', 'campaignData', 'brandList'));
+        return view('campaign.campaign-edit', compact('currentCampaign', 'campaignData', 'brandList'));
     }
 
     public function removeStore(Request $request, $id)
@@ -69,7 +75,7 @@ class CampaignController extends Controller
     {
         $validate = Assigned::where(['campaign_id' => $id, 'store_id' => $request->store, 'brand_id' => $request->brand])->value('id');
 
-        $resp = ['status' => $validate];
+        $resp = ['status' => 'ok'];
         if (!empty($validate) && $request->action == 'remove') {
             $resp = ['status' => 'record deleted'];
             $status = Assigned::destroy($validate);
