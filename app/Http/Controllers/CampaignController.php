@@ -55,7 +55,8 @@ class CampaignController extends Controller
 
     public function removeStore(Request $request, $id)
     {
-        $resp = ['status' => 'ok'];
+        $resp = ['status' => 'OK', 'requester' => $request->requester];
+        $resp['request'] = $request->toArray();
         if ($request->action == 'clearAll') {
             $ids = Assigned::where(['campaign_id' => $id, 'store_id' => $request->store])->pluck('id');
             if (!empty($ids)) {
@@ -75,11 +76,12 @@ class CampaignController extends Controller
     {
         $validate = Assigned::where(['campaign_id' => $id, 'store_id' => $request->store, 'brand_id' => $request->brand])->value('id');
 
-        $resp = ['status' => 'ok'];
+        $resp = ['status' => 'OK', 'requester' => $request->requester];
+        $resp['request'] = $request->toArray();
+        
         if (!empty($validate) && $request->action == 'remove') {
-            $resp = ['status' => 'record deleted'];
+            $resp['message'] = 'record removed';
             $status = Assigned::destroy($validate);
-            $resp['message'] = 'record deleted';
         } elseif (!empty($validate) && $request->action == 'urlexit' && $request->has('url')) {
             $resp['message'] = 'url updated';
             $row = Assigned::find($validate);
@@ -92,8 +94,9 @@ class CampaignController extends Controller
             $row->brand_id    = $request->brand;
             $row->save();
             $resp['message'] = 'record added';
-            $resp['data']    = $row->id;
+            // $resp['data']    = $row->id;
         } else {
+            $resp['status'] = 'FAILD';
             $resp['message'] = 'not sure what happend';
         }
 

@@ -8362,6 +8362,14 @@ button.close {
   margin-bottom: 0;
 }
 
+.saving-field {
+  background-color: #f2dede;
+}
+
+.saving-field.success {
+  background-color: #dff0d8;
+}
+
 .scroll-content-box {
   position: relative;
 }

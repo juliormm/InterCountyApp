@@ -19,6 +19,14 @@
     }
 }
 
+.saving-field {
+    background-color: #f2dede;
+    &.success {
+        background-color: #dff0d8;
+    }
+}
+
+
 .scroll-content-box {
 	position: relative;
 }

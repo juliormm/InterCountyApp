@@ -781,24 +781,24 @@ __webpack_require__(9);
 // Vue.component('favorite', require('./components/Favorite.vue'));
 // 
 // Vue.component('store-check', {
-// 	props: [ 'store_id', 'campaign_id'],
+//  props: [ 'store_id', 'campaign_id'],
 
-// 	// data() {
-// 	// 	return {
-// 	// 		addStore: false;
-// 	// 	};
-// 	// },
+//  // data() {
+//  //  return {
+//  //      addStore: false;
+//  //  };
+//  // },
 
-// 	template: `
-// 		<input type="checkbox"  v-bind:id="'store_' + store_id" v-model="checked" v-on:change="updateData(item)">
-// 	`,
+//  template: `
+//      <input type="checkbox"  v-bind:id="'store_' + store_id" v-model="checked" v-on:change="updateData(item)">
+//  `,
 
-// 	methods: {
-// 		updateData(item) {
+//  methods: {
+//      updateData(item) {
 
-// 			// console.log(this.checked)
-// 		}
-// 	}
+//          // console.log(this.checked)
+//      }
+//  }
 // })
 // 
 // 
@@ -807,19 +807,19 @@ __webpack_require__(9);
 // Vue.component('store-locations', {
 //   props:['address', 'phone'],
 //   template: `<div>
-// 				<location v-for="loc in locations"></location>
-//   			</div>
-//   			`,
+//              <location v-for="loc in locations"></location>
+//              </div>
+//              `,
 
-// 	data() {
-// 		return {locations: [{item:'one'}, {item:'two'}]};
-// 	}
+//  data() {
+//      return {locations: [{item:'one'}, {item:'two'}]};
+//  }
 // });
 
 // Vue.component('location', {
 
 //   template: `
-// 	 <div class="form-group">
+//   <div class="form-group">
 //         <label for="logo">Address</label>
 //         <input class="form-control" placeholder="store address" name="address{{ $loop->iteration }}" type="text" value="{{ old('address.$loop->iteration',$loc->address) }}">
 //     </div>
@@ -895,10 +895,17 @@ $(document).ready(function () {
                     creativeID.val(hyfn.dData[storeID].creative_id);
                 }
 
+                var oldValue = creativeID.val;
+                creativeID.on("focusin", function () {
+                    oldValue = $(this).val();
+                });
+
                 creativeID.on("focusout", function () {
-                    if (storeInput.prop("checked")) {
-                        var send = { store: storeID, campaign: 1, creative: $(this).val() };
-                        handleStores(send, '/tracking');
+                    elm = $(this);
+                    if (oldValue != elm.val() && storeInput.prop("checked")) {
+                        // $(this).addClass('saving-field');
+                        var send = { requester: 'creativeID', store: storeID, campaign: 1, creative: $(this).val() };
+                        apiCall(send, '/tracking');
                     }
                 });
             }
@@ -930,7 +937,7 @@ $(document).ready(function () {
                     var warning = brandBox.find('.brand-warning');
                     warning.removeClass('hidden');
                     deactiveBrands(brandBox);
-                    handleStores({ store: storeID, action: 'clearAll' }, '/campaigns/1/remove/store');
+                    apiCall({ requester: 'storeCheck', store: storeID, action: 'clearAll' }, '/campaigns/1/remove/store');
                 }
             });
         });
@@ -1005,7 +1012,8 @@ function activateBrands(parent) {
         $('.checkbox-item', item).on("click", function () {
             var brandID = $(this).data('brand-id');
             var storeID = $(this).data('store-id');
-            var send = { store: storeID, brand: brandID };
+            var send = { requester: 'brandCheck', store: storeID, brand: brandID };
+            var parent = $(this).parent();
 
             if (this.checked) {
                 send['action'] = 'add';
@@ -1014,17 +1022,16 @@ function activateBrands(parent) {
                 send['action'] = 'remove';
                 hideURLBox(storeID, brandID);
             }
-            handleStores(send, '/campaigns/1/update');
+
+            apiCall(send, '/campaigns/1/update');
             checkMessage(parent);
         });
 
         $('.ulrbox-item', item).on("focusout", function () {
             var brandID = $(this).data('brand-id');
             var storeID = $(this).data('store-id');
-            var send = { store: storeID, brand: brandID, action: 'urlexit', url: $(this).val() };
-            handleStores(send, '/campaigns/1/update');
-
-            console.log(brandID, storeID);
+            var send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: $(this).val() };
+            apiCall(send, '/campaigns/1/update');
         });
     });
 }
@@ -1039,7 +1046,60 @@ function deactiveBrands(parent) {
     });
 }
 
-function handleStores(dataObj, url) {
+function processCreativeID(json) {
+    var elm = $('#creativeID_' + json['request']['store']);
+    var msg = $('#creativeIDmsg_' + json['request']['store']);
+    msg.removeClass('alert-success alert-danger');
+    msg.text(json['message']);
+
+    if (json['status'] != 'OK') {
+        msg.addClass('alert-danger');
+        elm.val('');
+        setTimeout(function () {
+            msg.hide();
+        }, 5000);
+    } else {
+        msg.addClass('alert-success');
+        setTimeout(function () {
+            msg.hide();
+        }, 2000);
+    }
+
+    msg.show();
+}
+
+function processBrandCheck(json) {
+    var elm = $('#brandName_' + json['request']['store'] + '-' + json['request']['brand']);
+    if (json['status'] != 'OK') {
+        elm.parent().css('color', 'red');
+        setTimeout(function () {
+            elm.parent().css('color', '');
+        }, 2000);
+    } else {
+        elm.parent().css('color', '#00da00');
+        setTimeout(function () {
+            elm.parent().css('color', '');
+        }, 2000);
+    }
+}
+
+function processExitURL(json) {
+    var elm = $('#urlExit_' + json['request']['store'] + '-' + json['request']['brand']);
+
+    if (json['status'] != 'OK') {
+        elm.css('color', 'red');
+        setTimeout(function () {
+            elm.css('color', '');
+        }, 2000);
+    } else {
+        elm.css('color', '#00da00');
+        setTimeout(function () {
+            elm.css('color', '');
+        }, 2000);
+    }
+}
+
+function apiCall(dataObj, url) {
 
     // const url = (store) ? '/campaigns/1/remove/store' : '/campaigns/1/update';
     $.ajaxSetup({
@@ -1048,9 +1108,17 @@ function handleStores(dataObj, url) {
         }
     });
     var posting = $.post(hyfn.appURL + url, dataObj, function (data) {
+        if (data['requester'] === 'creativeID') {
+            processCreativeID(data);
+        }
 
-        // showURLBox(dataObj['store'], dataObj['brand']);
-        // console.log();
+        if (data['requester'] === 'brandCheck') {
+            processBrandCheck(data);
+        }
+
+        if (data['requester'] === 'exitURL') {
+            processExitURL(data);
+        }
     }, 'json').done(function () {
         // console.log("second success");
     }).fail(function () {

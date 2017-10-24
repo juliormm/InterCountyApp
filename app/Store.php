@@ -12,7 +12,7 @@ class Store extends Model
 {
 	public $timestamps = false;
 	protected $fillable = ['name', 'logo', 'default_phone'];
-    // protected $with = ['locations'];
+    protected $hidden = ['id', 'ic_dealer_id', 'assignedBrands'];
 
     public function locations()
     {
@@ -22,7 +22,7 @@ class Store extends Model
     public function assignedBrands()
     {
         // $brands = App\Store::find(2)->assinedBrands()->where('campaign_id', '=', 1)->get();
-        return $this->belongsToMany(Brand::class, 'assigned');
+        return $this->belongsToMany(Brand::class, 'assigned')->withPivot('exit_url');
     }
 
 }

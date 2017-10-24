@@ -23,7 +23,11 @@
                         <div class="form-group">
                             <label class="sr-only" for="creativeID_{{ $store->id }}">creative id</label>
                             <input type="number" maxlength="12" class="form-control input-sm" id="creativeID_{{ $store->id }}" placeholder="Creative ID" data-store-id="{{ $store->id }}">
+
                         </div>
+                        <div id="creativeIDmsg_{{ $store->id }}" class="alert" role="alert" style="display: none;">Messge goes here</div>
+                        
+
                         @endif
                     </div>
                 </div>
@@ -33,8 +37,8 @@
                         @foreach ($brandList as $brandkey => $brand)
                         <div class="form-inline brand-group">
                             <div class="checkbox inline-brands">
-                                <label for="brandName-{{ $store->id }}-{{ $brandkey }}">
-                                    <input class="checkbox-item" type="checkbox" data-brand-id="{{ $brandkey }}" data-store-id="{{ $store->id }}" value="{{ $brand }}" id="brandName-{{ $store->id }}-{{ $brandkey }}"> {{ $brand }}
+                                <label for="brandName_{{ $store->id }}-{{ $brandkey }}">
+                                    <input class="checkbox-item" type="checkbox" data-brand-id="{{ $brandkey }}" data-store-id="{{ $store->id }}" value="{{ $brand }}" id="brandName_{{ $store->id }}-{{ $brandkey }}"> {{ $brand }}
                                 </label>
                             </div>
                             <div class="ulrBox form-group hidden">
