@@ -1087,14 +1087,14 @@ function processExitURL(json) {
     var elm = $('#urlExit_' + json['request']['store'] + '-' + json['request']['brand']);
 
     if (json['status'] != 'OK') {
-        elm.css('color', 'red');
+        elm.css('background-color', '#f2dede');
         setTimeout(function () {
-            elm.css('color', '');
+            elm.css('background-color', '');
         }, 2000);
     } else {
-        elm.css('color', '#00da00');
+        elm.css('background-color', '#dff0d8');
         setTimeout(function () {
-            elm.css('color', '');
+            elm.css('background-color', '');
         }, 2000);
     }
 }
