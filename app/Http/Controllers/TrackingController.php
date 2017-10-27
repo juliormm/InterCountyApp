@@ -23,10 +23,11 @@ class TrackingController extends Controller
             $row  = Tracking::where([['store_id', $request->store], ['campaign_id', $request->campaign]])->get();
             $remove = empty($request->creative);
             $uniqueID = ($remove) ? NULL : Tracking::where('creative_id', $request->creative)->get();
+            
             if($row->isNotEmpty() && $remove ) {
                  $resp['message'] = 'id removed';
                  Tracking::destroy([$row[0]->id]);
-            } elseif ($row->isNotEmpty() && $uniqueID->isNotEmpty()) {
+            } elseif ($row->isNotEmpty() && $uniqueID->isEmpty()) {
                 $resp['message'] = 'id updated';
                 $update  = Tracking::where('store_id', $request->store)->where('campaign_id', $request->campaign)->update(['creative_id' => $request->creative]); 
             } elseif ($row->isEmpty() && $uniqueID->isNotEmpty()){
@@ -40,8 +41,12 @@ class TrackingController extends Controller
                 $newRow->campaign_id = $request->campaign;
                 $newRow->save();
                 $resp['message'] = 'id added';
+            } else {
+                 $resp['message'] = $uniqueID;
             }
+
         } else {
+            $resp['status'] = 'FAILED';
             $resp['message'] = 'missing store id, campaign id or creative id';
             $resp['request'] = $request;
         }
