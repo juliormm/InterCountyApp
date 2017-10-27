@@ -142,16 +142,16 @@ $(document).ready(function() {
                     creativeID.val(hyfn.dData[storeID].creative_id);
                 }
 
-                let oldValue = creativeID.val;
+                let oldValue = creativeID.val();
                 creativeID.on("focusin", function() {
                     oldValue = $(this).val();
                 });
 
                 creativeID.on("focusout", function() {
-                    elm = $(this);
-                    if (oldValue != elm.val() && storeInput.prop("checked")) {
+                    elmVal = $(this).val();
+                    if (oldValue != elmVal && storeInput.prop("checked")) {
                         // $(this).addClass('saving-field');
-                        const send = { requester: 'creativeID', store: storeID, campaign: 1, creative: $(this).val() };
+                        const send = { requester: 'creativeID', store: storeID, campaign: 1, creative: elmVal };
                         apiCall(send, '/tracking');
                     }
                 });
@@ -277,11 +277,21 @@ function activateBrands(parent) {
             checkMessage(parent);
         });
 
+        let oldValue = $('.ulrbox-item', item).val();
+        $('.ulrbox-item', item).on("focusin", function() {
+            oldValue = $(this).val();
+        });
+
         $('.ulrbox-item', item).on("focusout", function() {
+            console.log(oldValue);
             const brandID = $(this).data('brand-id');
             const storeID = $(this).data('store-id');
-            const send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: $(this).val() };
-            apiCall(send, '/campaigns/1/update');
+            const valElm = $(this).val();
+            if(oldValue != valElm){
+                const send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: valElm };
+                apiCall(send, '/campaigns/1/update');
+            }
+            
         });
 
     })

@@ -895,16 +895,16 @@ $(document).ready(function () {
                     creativeID.val(hyfn.dData[storeID].creative_id);
                 }
 
-                var oldValue = creativeID.val;
+                var oldValue = creativeID.val();
                 creativeID.on("focusin", function () {
                     oldValue = $(this).val();
                 });
 
                 creativeID.on("focusout", function () {
-                    elm = $(this);
-                    if (oldValue != elm.val() && storeInput.prop("checked")) {
+                    elmVal = $(this).val();
+                    if (oldValue != elmVal && storeInput.prop("checked")) {
                         // $(this).addClass('saving-field');
-                        var send = { requester: 'creativeID', store: storeID, campaign: 1, creative: $(this).val() };
+                        var send = { requester: 'creativeID', store: storeID, campaign: 1, creative: elmVal };
                         apiCall(send, '/tracking');
                     }
                 });
@@ -1027,11 +1027,20 @@ function activateBrands(parent) {
             checkMessage(parent);
         });
 
+        var oldValue = $('.ulrbox-item', item).val();
+        $('.ulrbox-item', item).on("focusin", function () {
+            oldValue = $(this).val();
+        });
+
         $('.ulrbox-item', item).on("focusout", function () {
+            console.log(oldValue);
             var brandID = $(this).data('brand-id');
             var storeID = $(this).data('store-id');
-            var send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: $(this).val() };
-            apiCall(send, '/campaigns/1/update');
+            var valElm = $(this).val();
+            if (oldValue != valElm) {
+                var send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: valElm };
+                apiCall(send, '/campaigns/1/update');
+            }
         });
     });
 }

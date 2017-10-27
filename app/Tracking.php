@@ -10,7 +10,7 @@ class Tracking extends Model
 {
    protected $table = 'tracking';
    public $timestamps = false;
-   protected $hidden = ['store_id', 'id', 'created_at', 'updated_at', 'impressions', 'campaign_id', 'next_brand'];
+   // protected $hidden = ['store_id', 'id', 'created_at', 'updated_at', 'impressions', 'campaign_id', 'next_brand'];
    
 
    public function store()

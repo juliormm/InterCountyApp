@@ -8370,6 +8370,12 @@ button.close {
   background-color: #dff0d8;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .scroll-content-box {
   position: relative;
 }

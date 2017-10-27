@@ -18,6 +18,10 @@ class ComposerServiceProvider extends ServiceProvider
             'campaign.campaign-edit', 'App\Http\ViewComposers\CampaignComposer'
         );
 
+        View::composer(
+            'campaign.campaign-status', 'App\Http\ViewComposers\CampaignComposer'
+        );
+
         // // Using Closure based composers...
         // View::composer('dashboard', function ($view) {
         //     //

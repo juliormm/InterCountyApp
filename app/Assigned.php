@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Campaign;
 use App\Store;
 use App\Brand;
+use App\Tracking;
 
 class Assigned extends Model
 {
 
 	protected $table = 'assigned';
     public $timestamps = false;
-    protected $hidden = ['id', 'campaign_id', 'store_id'];
+    // protected $hidden = ['id', 'campaign_id', 'store_id'];
 
     public function store()
     {
@@ -33,6 +34,18 @@ class Assigned extends Model
     {
         return $this->exit_url;
     }
+
+    public function tracking()
+    {
+        
+         return $this->hasOne(Tracking::class, 'store_id', 'store_id');
+    }
+
+//     public function getTrackAttribute()
+// {
+
+//     return "$this->tracking} {$this->last_name}";
+// }
     
     
 }
