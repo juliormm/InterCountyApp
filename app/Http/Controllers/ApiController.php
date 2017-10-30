@@ -19,7 +19,7 @@ class ApiController extends Controller
 
     	if($data) {
     		$data['status'] = 'OK';
-    		return $data;
+    		return $data->makeVisible('store')->makeHidden(['tracking', 'brand', 'impressions', 'creativeid']);
     	} else {
     		return ['status' => 'FAILED', 'message' => 'no store or brand was matching the request'];
     	}
