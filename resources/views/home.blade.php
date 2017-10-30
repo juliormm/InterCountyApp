@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('tab-nav') 
-    @include('layouts.tab-nav') 
-@endsection 
+
 @section('content')
 <div class="container">
     <div class="row">

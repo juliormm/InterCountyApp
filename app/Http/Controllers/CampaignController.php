@@ -32,49 +32,56 @@ class CampaignController extends Controller
         return view('campaign-list', compact('campaignList'));
     }
 
+    public function create(Request $request)
+    {
+        
+        $campaign = new Campaign;
+        $campaign->name = $request->input('name');
+
+        $campaign->save();
+
+        return redirect('campaigns/'.$campaign->id.'/edit')->with('status', 'Campaign Created');;
+    }
+
+
     public function status($id)
     {
+        // var_export(\Illuminate\Support\Facades\DB::getQueryLog());
         $currentCampaign = $id;
         // $brandList       = Brand::orderBy('name', 'asc')->pluck('name', 'id');
         // $uStores         = DB::table('assigned')->where('campaign_id', $id)->get();
-        $uStores = Assigned::where('campaign_id', $id)->get();
+        $uStores = Assigned::where('campaign_id', $id)->with(array('tracking' => function ($query) use ($id) {
+            $query->where('campaign_id', $id);
+        }))->with('brand')->get();
 
-        // // print_r($uStores);
-        $testing  = $uStores->map(function ($item, $key) use($id) {
-           $track = Tracking::where([['campaign_id', $id], ['store_id', $item->id]])->get();
-           $item['creative_id'] = $track;
-           return $item;
+        $grouped = $uStores->groupBy('store_id');
+
+        $groupedStores = $grouped->map(function ($item, $key) {
+            $arr = [];
+            $arr['creative_id'] = $item[0]->creative_id;
+            $arr['store_logo'] = $item[0]->store_logo;
+            $arr['store_default_phone'] = $item[0]->store_default_phone;
+            $arr['store_name'] = $item[0]->store_name;
+
+            $data = $item->mapWithKeys(function($e, $k){
+                return [$e->brand_id => ['exit' => $e->exit_url, 'name' => $e->brand_name]];
+            });
+
+            $arr['brands'] = $data->toArray();
+            return $arr;
         });
 
-        print_r($testing->toArray());
-        // // // $grouped         = $uStores->groupBy('store_id');
-        // 
-        // foreach ($uStores2  as $key => $value) {
-            
 
+         $campaignName = Campaign::where('id', $id)->value('name');
 
-        // }
-
-        // echo '-------';
-
-       // var_export(\Illuminate\Support\Facades\DB::getQueryLog());
-
-        // $trakingData = Tracking::where('campaign_id', $id)->get();
-
-        // $campaignData    = $grouped->map(function ($arr, $key) {
-        //    $cID =  $arr->pluck('campaign_id')[0];
-        //     $track = Tracking::where('campaign_id', $cID)->where('store_id', $key)->first();
-        //     $crvID = ($track) ? $track->creative_id : '';
-        //     $ret = ['creative_id' => $crvID, 'brand' => $arr->pluck('exit_url', 'brand_id')];
-        //     return $ret;
-        // });
-
+        // print_r($groupedStores->toArray());
+        
         // JavaScript::put([
         //     'dData'     => $campaignData,
         //     'brandList' => $brandList,
         //     'appURL' => env("APP_URL", "http://localhost")
         // ]);
-        // return view('campaign.campaign-status', compact('currentCampaign', 'campaignData', 'brandList', 'trakingData'));
+        return view('campaign.campaign-status', compact('currentCampaign', 'groupedStores', 'campaignName'));
     }
 
     public function edit($id)
@@ -92,12 +99,15 @@ class CampaignController extends Controller
             return $ret;
         });
 
+        $campaignName = Campaign::where('id', $id)->value('name');
+
         JavaScript::put([
             'dData'     => $campaignData,
             'brandList' => $brandList,
-            'appURL'    => env("APP_URL", "http://localhost"),
+            'currCamp' => $id,
+            'appURL'    => env("APP_URL"),
         ]);
-        return view('campaign.campaign-edit', compact('currentCampaign', 'campaignData', 'brandList'));
+        return view('campaign.campaign-edit', compact('currentCampaign', 'campaignData', 'brandList', 'campaignName'));
     }
 
     public function removeStore(Request $request, $id)
@@ -107,10 +117,21 @@ class CampaignController extends Controller
         if ($request->action == 'clearAll') {
             $ids = Assigned::where(['campaign_id' => $id, 'store_id' => $request->store])->pluck('id');
             if (!empty($ids)) {
-                $resp['message'] = 'store removed';
-                Assigned::destroy($ids->toArray());
+                $removeStat = Assigned::destroy($ids->toArray());
+                 $trackingDelete = Tracking::where('campaign_id', $id)->where('store_id', $request->store)->delete();
+                // dd($removeStat);
+                // $resp['dev'] = $removeStat
+                // if($removeStat == 0){
+                //      $resp['status'] = 'FAILD';
+                //     $resp['message'] = 'could not remove stores';  
+                // } else {
+                //    $resp['message'] = 'store removed from current campaign';
+                   
+                //     $resp['tracking'] = $trackingDelete;
+                // }
             } else {
-                $resp['message'] = 'nothing was found';
+                $resp['status'] = 'FAILD';
+                $resp['message'] = 'Could not find in db';
             }
 
         }

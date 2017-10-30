@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('tab-nav')
+{{-- @section('tab-nav')
 	@include('layouts.tab-nav')
-@endsection
+@endsection --}}
 
 @section('content')
 	<div class="container store-list-container">

@@ -876,7 +876,7 @@ __webpack_require__(9);
 
 
 $(document).ready(function () {
-    // console.log(brandList);
+
     if ($("#campaign-edit").length > 0) {
         // console.log('running');
         var blocker = $(".loading-blocker");
@@ -904,7 +904,7 @@ $(document).ready(function () {
                     elmVal = $(this).val();
                     if (oldValue != elmVal && storeInput.prop("checked")) {
                         // $(this).addClass('saving-field');
-                        var send = { requester: 'creativeID', store: storeID, campaign: 1, creative: elmVal };
+                        var send = { requester: 'creativeID', store: storeID, campaign: +hyfn.currCamp, creative: elmVal };
                         apiCall(send, '/tracking');
                     }
                 });
@@ -921,7 +921,8 @@ $(document).ready(function () {
                 autoCheckBrands(brandBox, hyfn.dData[storeID]);
             }
 
-            storeInput.change(function () {
+            storeInput.on("click", function (event) {
+
                 if (!hyfn.dData.hasOwnProperty(storeID)) {
                     hyfn.dData[storeID] = [];
                 }
@@ -931,13 +932,18 @@ $(document).ready(function () {
                     brandBox.removeClass('hidden');
                     liStore.addClass('selected');
                 } else {
-                    hyfn.dData[storeID] = [];
-                    brandBox.addClass('hidden');
-                    liStore.removeClass('selected');
-                    var warning = brandBox.find('.brand-warning');
-                    warning.removeClass('hidden');
-                    deactiveBrands(brandBox);
-                    apiCall({ requester: 'storeCheck', store: storeID, action: 'clearAll' }, '/campaigns/1/remove/store');
+                    if (confirm('Do you want to deactivet store?')) {
+                        hyfn.dData[storeID] = [];
+                        brandBox.addClass('hidden');
+                        liStore.removeClass('selected');
+                        var warning = brandBox.find('.brand-warning');
+                        warning.removeClass('hidden');
+                        deactiveBrands(brandBox);
+                        apiCall({ requester: 'storeCheck', store: storeID, action: 'clearAll' }, '/campaigns/' + hyfn.currCamp + '/remove/store');
+                    } else {
+                        event.preventDefault();
+                        // event.stopPropagation();
+                    }
                 }
             });
         });
@@ -968,7 +974,7 @@ function autoCheckBrands(parent, data) {
     var warning = parent.find('.brand-warning');
 
     brandGroups.each(function (idx, item) {
-        var chkBox = $('.checkbox-item', item);
+        var chkBox = $('.checkbox-brand-item', item);
         var urlBox = $('.ulrbox-item', item);
 
         var brandID = $(chkBox).data('brand-id');
@@ -984,12 +990,25 @@ function autoCheckBrands(parent, data) {
     });
 }
 
-function checkMessage(parent) {
-    var brandChkBoxs = parent.find('input[type="checkbox"]');
+function clearAllURLs(storeID) {
+    var parent = $('#store_' + storeID);
+    var brandChkBoxs = parent.find('input.ulrbox-item:text');
+    console.log(brandChkBoxs);
+    brandChkBoxs.each(function (idx, item) {
+        $(item).val('');
+        $(item).parent().addClass('hidden');
+    });
+}
+
+function checkMessage(storeID) {
+
+    var parent = $('#store_' + storeID);
+    var brandChkBoxs = parent.find('input.checkbox-brand-item:checkbox');
     var warning = parent.find('.brand-warning');
     var empty = true;
+
     brandChkBoxs.each(function (idx, item) {
-        if (this.checked && empty) {
+        if (this.checked) {
             empty = false;
         }
     });
@@ -1009,22 +1028,33 @@ function activateBrands(parent) {
 
     brandGroups.each(function (idx, item) {
         // add listeners
-        $('.checkbox-item', item).on("click", function () {
+
+        $('.checkbox-brand-item', item).on("click", function (event) {
             var brandID = $(this).data('brand-id');
             var storeID = $(this).data('store-id');
             var send = { requester: 'brandCheck', store: storeID, brand: brandID };
             var parent = $(this).parent();
-
+            var runAction = false;
             if (this.checked) {
                 send['action'] = 'add';
                 showURLBox(storeID, brandID);
+                runAction = true;
             } else {
-                send['action'] = 'remove';
-                hideURLBox(storeID, brandID);
+
+                if (confirm('Do you want to deactivet brand?')) {
+                    send['action'] = 'remove';
+                    hideURLBox(storeID, brandID);
+                    runAction = true;
+                } else {
+                    event.preventDefault();
+                }
             }
 
-            apiCall(send, '/campaigns/1/update');
-            checkMessage(parent);
+            if (runAction) {
+                console.log('run line');
+                apiCall(send, '/campaigns/' + hyfn.currCamp + '/update');
+                checkMessage(storeID);
+            }
         });
 
         var oldValue = $('.ulrbox-item', item).val();
@@ -1039,7 +1069,7 @@ function activateBrands(parent) {
             var valElm = $(this).val();
             if (oldValue != valElm) {
                 var send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: valElm };
-                apiCall(send, '/campaigns/1/update');
+                apiCall(send, '/campaigns/' + hyfn.currCamp + '/update');
             }
         });
     });
@@ -1108,6 +1138,28 @@ function processExitURL(json) {
     }
 }
 
+function processStoreCheck(json) {
+
+    var elm = $('#creativeID_' + json['request']['store']);
+
+    // const msg = $('#creativeIDmsg_' + json['request']['store']);
+    // console.log(elm.parent())
+    if (json['status'] != 'OK') {
+        //  elm.parent().css('background-color', '#f2dede');
+        // setTimeout(function() {
+        //        elm.parent().css('background-color', '');
+        //   }, 2000);
+
+    } else {
+        elm.val('');
+        clearAllURLs(json['request']['store']);
+        //  elm.parent().css('background-color', '#dff0d8');
+        // setTimeout(function() {
+        //      elm.parent().css('background-color', '');
+        // }, 2000);
+    }
+}
+
 function apiCall(dataObj, url) {
 
     // const url = (store) ? '/campaigns/1/remove/store' : '/campaigns/1/update';
@@ -1127,6 +1179,10 @@ function apiCall(dataObj, url) {
 
         if (data['requester'] === 'exitURL') {
             processExitURL(data);
+        }
+
+        if (data['requester'] === 'storeCheck') {
+            processStoreCheck(data);
         }
     }, 'json').done(function () {
         // console.log("second success");

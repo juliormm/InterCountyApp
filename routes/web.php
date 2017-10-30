@@ -36,13 +36,12 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('/campaigns', 'CampaignController@index');
-// Route::get('/campaigns/{id}', 'CampaignController@show');
-// Route::get('/campaigns/create', 'CampaignController@create');
+
 Route::get('/campaigns/{id}/status', 'CampaignController@status');
 Route::get('/campaigns/{id}/edit', 'CampaignController@edit');
 Route::post('/campaigns/{id}/update', 'CampaignController@update');
 Route::post('/campaigns/{id}/remove/store', 'CampaignController@removeStore');
+Route::post('/campaigns/create', 'CampaignController@create');
 
 
 Route::get('/stores', 'StoreController@index')->name('store-list');;;

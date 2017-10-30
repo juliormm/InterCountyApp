@@ -15,12 +15,13 @@ class CreateTrackingTable extends Migration
     {
         Schema::create('tracking', function (Blueprint $table) {
             // $table->increments('id');
-            $table->integer('creative_id');
+            $table->bigInteger('creative_id');
             $table->integer('store_id');
             $table->integer('campaign_id');
-            $table->integer('next_brand')->default(1);
+            $table->integer('next_brand')->default(0);
             $table->integer('impressions')->default(0);
             $table->unique(['campaign_id', 'store_id']);
+            $table->index('creative_id');
         });
     }
 

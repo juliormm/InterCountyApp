@@ -1,34 +1,49 @@
-<h3 class="text-center">Campaign Status</h3>
+<h3 class="text-center">Campaign Status <span class="badge">{{ count($groupedStores) }}</span> </h3>
 
-{{-- {{ dump($trakingData) }} --}}
+
 
 <div id="store-list-campaign" class="scroll-content-box">
     <ul class="list-group">
-        @foreach ($storeList as $store)
-        <li class="list-group-item checkbox" style="cursor: pointer;" id="store_{{ $store->id }}">
+        @foreach ($groupedStores as $key => $store)
+        <li class="list-group-item checkbox" id="store_{{ $key }}">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="logo-thumb">
-                        <img class="logo-img" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/store_logos/{{ $store->logo }}" alt="logo">
+                        <img class="logo-img" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/store_logos/{{ $store['store_logo']}}" alt="logo">
                     </div>
-                  {{--   <div class="form-inline store-section">
-                        <label>
-                            <input type="checkbox" class="store-item" value="{{ $store->id }}">{{ $store->name }}
-                        </label>
-                        @if(Auth::user()->name === 'Julio' || Auth::user()->name === 'admin')
-                        <div class="form-group">
-                            <label class="sr-only" for="creativeID_{{ $store->id }}">creative id</label>
-                            <input type="number" maxlength="12" class="form-control input-sm" id="creativeID_{{ $store->id }}" placeholder="Creative ID" data-store-id="{{ $store->id }}">
+                    <div>
+                       {{ $store['store_name']}}
+                    </div>
 
-                        </div>
-                        <div id="creativeIDmsg_{{ $store->id }}" class="alert" role="alert" style="display: none;">Messge goes here</div>
-                        
-
-                        @endif
-                    </div> --}}
                 </div>
-                <div class="col-sm-9">
-                    test
+                <div class="col-sm-10">
+                    <table class="table table-bordered table-condensed">
+                        <tr>
+                            <th class="text-center" width="20%">Creative ID</th>
+                            <th class="text-center" width="20%">Default Phone</th>
+                            <th class="text-center" width="60%">Brands <span class="badge">{{ count($store['brands']) }}</span></th>
+                        </tr>
+                        <tr>
+                            <td> <p class="text-center {{ empty($store['creative_id']) ? 'bg-danger' : 'bg-success' }}">{{ empty($store['creative_id']) ? 'MISSING' : $store['creative_id'] }} </p></td>
+                            <td> <p class="text-center {{ ( !empty($store['store_default_phone']) && strlen($store['store_default_phone']) != 10 ) ? 'bg-danger' : 'bg-success' }}">{{ empty($store['store_default_phone']) ? 'MISSING' : '('.substr($store['store_default_phone'], 0, 3).') '.substr($store['store_default_phone'], 3, 3).'-'.substr($store['store_default_phone'],6)  }} </p></td>
+                            <td>
+                                {{-- <ul class="list-group"> --}}
+                                     @foreach ($store['brands'] as $bKey => $brand)
+                                     {{-- <li class="list-group-item {{ empty($brand['exit']) ? 'list-group-item-danger' : 'list-group-item-success' }}"> --}}
+                                       <span class="label {{ empty($brand['exit']) ? 'label-danger' : 'label-success' }}">{{ $brand['name'] }}</span>
+                                        {{-- <button type="button" class="btn btn-sm "></button> --}}
+
+                                        {{-- <span class="text-center "> </span> --}}
+                                    {{-- </li> --}}
+                                    @endforeach
+                                {{-- </ul> --}}
+                                    
+
+                            </td>
+                        </tr>
+                    </table>
+                     
+
                    {{--  <div class="brand-box well well-sm hidden">
                         <div class="brand-warning bg-danger">At least one brand has to be added to save store.</div>
                         @foreach ($brandList as $brandkey => $brand)

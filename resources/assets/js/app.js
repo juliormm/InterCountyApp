@@ -123,7 +123,7 @@ require('./bootstrap');
 
 
 $(document).ready(function() {
-    // console.log(brandList);
+
     if ($("#campaign-edit").length > 0) {
         // console.log('running');
         const blocker = $(".loading-blocker");
@@ -151,7 +151,7 @@ $(document).ready(function() {
                     elmVal = $(this).val();
                     if (oldValue != elmVal && storeInput.prop("checked")) {
                         // $(this).addClass('saving-field');
-                        const send = { requester: 'creativeID', store: storeID, campaign: 1, creative: elmVal };
+                        const send = { requester: 'creativeID', store: storeID, campaign: +hyfn.currCamp, creative: elmVal };
                         apiCall(send, '/tracking');
                     }
                 });
@@ -168,7 +168,9 @@ $(document).ready(function() {
                 autoCheckBrands(brandBox, hyfn.dData[storeID]);
             }
 
-            storeInput.change(function() {
+            storeInput.on("click", function(event) {
+       
+             
                 if (!hyfn.dData.hasOwnProperty(storeID)) {
                     hyfn.dData[storeID] = []
                 }
@@ -179,14 +181,19 @@ $(document).ready(function() {
                     liStore.addClass('selected');
 
                 } else {
-                    hyfn.dData[storeID] = []
-                    brandBox.addClass('hidden');
-                    liStore.removeClass('selected');
-                    const warning = brandBox.find('.brand-warning');
-                    warning.removeClass('hidden');
-                    deactiveBrands(brandBox)
-                    apiCall({ requester: 'storeCheck', store: storeID, action: 'clearAll' }, '/campaigns/1/remove/store');
-
+                    if (confirm('Do you want to deactivet store?')) {
+                        hyfn.dData[storeID] = []
+                        brandBox.addClass('hidden');
+                        liStore.removeClass('selected');
+                        const warning = brandBox.find('.brand-warning');
+                        warning.removeClass('hidden');
+                        deactiveBrands(brandBox)
+                        apiCall({ requester: 'storeCheck', store: storeID, action: 'clearAll' }, '/campaigns/'+ hyfn.currCamp +'/remove/store');
+                    } else {
+                          event.preventDefault();
+                        // event.stopPropagation();
+                    }
+                    
                 }
             });
         });
@@ -217,7 +224,7 @@ function autoCheckBrands(parent, data) {
     const warning = parent.find('.brand-warning');
 
     brandGroups.each(function(idx, item) {
-        const chkBox = $('.checkbox-item', item);
+        const chkBox = $('.checkbox-brand-item', item);
         const urlBox = $('.ulrbox-item', item);
 
         const brandID = $(chkBox).data('brand-id');
@@ -233,12 +240,25 @@ function autoCheckBrands(parent, data) {
     });
 }
 
-function checkMessage(parent) {
-    const brandChkBoxs = parent.find('input[type="checkbox"]');
+function clearAllURLs(storeID){
+    const parent = $('#store_'+storeID);
+    const brandChkBoxs = parent.find('input.ulrbox-item:text');
+    console.log(brandChkBoxs);
+    brandChkBoxs.each(function(idx, item) {
+        $(item).val('');
+        $(item).parent().addClass('hidden');
+    });
+}
+
+function checkMessage(storeID) {
+   
+    const parent = $('#store_'+storeID);
+    const brandChkBoxs = parent.find('input.checkbox-brand-item:checkbox');
     const warning = parent.find('.brand-warning');
     let empty = true;
+
     brandChkBoxs.each(function(idx, item) {
-        if (this.checked && empty) {
+        if (this.checked) {
             empty = false;
         }
     });
@@ -258,23 +278,34 @@ function activateBrands(parent) {
 
     brandGroups.each(function(idx, item) {
         // add listeners
-        $('.checkbox-item', item).on("click", function() {
+        
+        $('.checkbox-brand-item', item).on("click", function(event) {
             const brandID = $(this).data('brand-id');
             const storeID = $(this).data('store-id');
             const send = { requester: 'brandCheck', store: storeID, brand: brandID }
             const parent = $(this).parent();
-
+            let runAction = false;
             if (this.checked) {
                 send['action'] = 'add';
                 showURLBox(storeID, brandID);
+                runAction = true;
             } else {
-                send['action'] = 'remove';
-                hideURLBox(storeID, brandID);
+
+                if (confirm('Do you want to deactivet brand?')) {
+                    send['action'] = 'remove';
+                    hideURLBox(storeID, brandID);
+                    runAction = true;
+                } else {
+                    event.preventDefault();
+                }
             }
 
-
-            apiCall(send, '/campaigns/1/update');
-            checkMessage(parent);
+            if(runAction){
+                console.log('run line')
+                 apiCall(send, '/campaigns/'+ hyfn.currCamp +'/update');
+                checkMessage(storeID);
+            }
+           
         });
 
         let oldValue = $('.ulrbox-item', item).val();
@@ -289,7 +320,7 @@ function activateBrands(parent) {
             const valElm = $(this).val();
             if(oldValue != valElm){
                 const send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: valElm };
-                apiCall(send, '/campaigns/1/update');
+                apiCall(send, '/campaigns/'+ hyfn.currCamp +'/update');
             }
             
         });
@@ -365,6 +396,28 @@ function processExitURL(json){
     }
 }
 
+function processStoreCheck(json){
+    
+    const elm = $('#creativeID_' + json['request']['store']);
+
+    // const msg = $('#creativeIDmsg_' + json['request']['store']);
+    // console.log(elm.parent())
+    if (json['status'] != 'OK') { 
+      //  elm.parent().css('background-color', '#f2dede');
+      // setTimeout(function() {
+      //        elm.parent().css('background-color', '');
+      //   }, 2000);
+
+    } else {
+        elm.val('');
+        clearAllURLs(json['request']['store']);
+        //  elm.parent().css('background-color', '#dff0d8');
+        // setTimeout(function() {
+        //      elm.parent().css('background-color', '');
+        // }, 2000);
+    }
+}
+
 
 function apiCall(dataObj, url) {
 
@@ -385,6 +438,10 @@ function apiCall(dataObj, url) {
 
             if(data['requester'] === 'exitURL'){
                 processExitURL(data);
+            }
+
+            if(data['requester'] === 'storeCheck'){
+                processStoreCheck(data)
             }
 
         }, 'json')

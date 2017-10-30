@@ -1,4 +1,3 @@
-<h3 class="text-center">Edit Campaign</h3>
 <div class="well">
     <ul>
         <li>Select store to be inlcuded in this campaign.</li>
@@ -16,8 +15,8 @@
                         <img class="logo-img" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/store_logos/{{ $store->logo }}" alt="logo">
                     </div>
                     <div class="form-inline store-section">
-                        <label>
-                            <input type="checkbox" class="store-item" value="{{ $store->id }}">{{ $store->name }}
+                        <label for="storeID_{{ $store->id }}">
+                            <input type="checkbox" class="store-item" value="{{ $store->id }}" id="storeID_{{ $store->id }}">{{ $store->name }}
                         </label>
                         @if(Auth::user()->name === 'Julio' || Auth::user()->name === 'admin')
                         <div class="form-group">
@@ -38,7 +37,7 @@
                         <div class="form-inline brand-group">
                             <div class="checkbox inline-brands">
                                 <label for="brandName_{{ $store->id }}-{{ $brandkey }}">
-                                    <input class="checkbox-item" type="checkbox" data-brand-id="{{ $brandkey }}" data-store-id="{{ $store->id }}" value="{{ $brand }}" id="brandName_{{ $store->id }}-{{ $brandkey }}"> {{ $brand }}
+                                    <input class="checkbox-brand-item" type="checkbox" data-brand-id="{{ $brandkey }}" data-store-id="{{ $store->id }}" value="{{ $brand }}" id="brandName_{{ $store->id }}-{{ $brandkey }}"> {{ $brand }}
                                 </label>
                             </div>
                             <div class="ulrBox form-group hidden">
