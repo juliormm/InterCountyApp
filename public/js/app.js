@@ -882,6 +882,7 @@ $(document).ready(function () {
         var blocker = $(".loading-blocker");
         blocker.show();
 
+        // setup
         $("#campaign-stores ul li").each(function (index) {
             var liStore = $(this);
             var storeID = this.id.replace("store_", "");
@@ -891,10 +892,7 @@ $(document).ready(function () {
             if ($('#creativeID_' + storeID).length) {
                 var creativeID = $('#creativeID_' + storeID);
 
-                if (hyfn.dData[storeID]) {
-                    creativeID.val(hyfn.dData[storeID].creative_id);
-                }
-
+                // setup creative id interactions
                 var oldValue = creativeID.val();
                 creativeID.on("focusin", function () {
                     oldValue = $(this).val();
@@ -903,37 +901,23 @@ $(document).ready(function () {
                 creativeID.on("focusout", function () {
                     elmVal = $(this).val();
                     if (oldValue != elmVal && storeInput.prop("checked")) {
-                        // $(this).addClass('saving-field');
                         var send = { requester: 'creativeID', store: storeID, campaign: +hyfn.currCamp, creative: elmVal };
                         apiCall(send, '/tracking');
                     }
                 });
             }
 
-            // check store
-            if (hyfn.dData[storeID]) {
-                storeInput.prop("checked", true);
-                activateBrands(brandBox, hyfn.dData[storeID]);
-
-                liStore.addClass('selected');
-                brandBox.removeClass('hidden');
-
-                autoCheckBrands(brandBox, hyfn.dData[storeID]);
+            if (storeInput.prop("checked")) {
+                activateBrands(brandBox);
             }
 
             storeInput.on("click", function (event) {
-
-                if (!hyfn.dData.hasOwnProperty(storeID)) {
-                    hyfn.dData[storeID] = [];
-                }
-
                 if (this.checked) {
                     activateBrands(brandBox);
                     brandBox.removeClass('hidden');
                     liStore.addClass('selected');
                 } else {
                     if (confirm('Do you want to deactivet store?')) {
-                        hyfn.dData[storeID] = [];
                         brandBox.addClass('hidden');
                         liStore.removeClass('selected');
                         var warning = brandBox.find('.brand-warning');
@@ -958,42 +942,38 @@ $(document).ready(function () {
 
 function showURLBox(store_id, brand_id) {
     var input = $('#urlExit_' + store_id + '-' + brand_id);
-    // console.log(input.parent());
     input.parent().removeClass('hidden');
 }
 
 function hideURLBox(store_id, brand_id) {
     var input = $('#urlExit_' + store_id + '-' + brand_id);
-    // console.log(input.parent());
     input.parent().addClass('hidden');
 }
 
-function autoCheckBrands(parent, data) {
-    var brandGroups = parent.find('.brand-group');
-    // const urlBox = parent.find('.ulrbox-item');
-    var warning = parent.find('.brand-warning');
+// function autoCheckBrands(parent, data) {
+//     const brandGroups = parent.find('.brand-group');
+//     const warning = parent.find('.brand-warning');
 
-    brandGroups.each(function (idx, item) {
-        var chkBox = $('.checkbox-brand-item', item);
-        var urlBox = $('.ulrbox-item', item);
+//     brandGroups.each(function(idx, item) {
+//         const chkBox = $('.checkbox-brand-item', item);
+//         const urlBox = $('.ulrbox-item', item);
 
-        var brandID = $(chkBox).data('brand-id');
-        var storeID = $(chkBox).data('store-id');
-        // console.log(chkBox.prop("checked"));
-        if (data.brand.hasOwnProperty(brandID)) {
-            chkBox.prop("checked", true);
-            urlBox.val(data.brand[brandID]);
-            // $(urlBox).value(data[brandID]);
-            showURLBox(storeID, brandID);
-            warning.addClass('hidden');
-        }
-    });
-}
+//         const brandID = $(chkBox).data('brand-id');
+//         const storeID = $(chkBox).data('store-id');
+//         // console.log(chkBox.prop("checked"));
+//         if (data.brand.hasOwnProperty(brandID)) {
+//             chkBox.prop("checked", true);
+//             urlBox.val(data.brand[brandID]);
+//             // $(urlBox).value(data[brandID]);
+//             showURLBox(storeID, brandID)
+//             warning.addClass('hidden');
+//         }
+//     });
+// }
 
 function clearAllURLs(storeID) {
     var parent = $('#store_' + storeID);
     var brandChkBoxs = parent.find('input.ulrbox-item:text');
-    console.log(brandChkBoxs);
     brandChkBoxs.each(function (idx, item) {
         $(item).val('');
         $(item).parent().addClass('hidden');
@@ -1021,11 +1001,7 @@ function checkMessage(storeID) {
 }
 
 function activateBrands(parent) {
-    console.log('binding...');
     var brandGroups = parent.find('.brand-group');
-
-    // console.log(brandGroups);
-
     brandGroups.each(function (idx, item) {
         // add listeners
 
@@ -1051,7 +1027,6 @@ function activateBrands(parent) {
             }
 
             if (runAction) {
-                console.log('run line');
                 apiCall(send, '/campaigns/' + hyfn.currCamp + '/update');
                 checkMessage(storeID);
             }
@@ -1076,7 +1051,6 @@ function activateBrands(parent) {
 }
 
 function deactiveBrands(parent) {
-    console.log('unbinding...');
     var brandChkBoxs = parent.find('input[type="checkbox"]');
     brandChkBoxs.each(function (idx, item) {
         // const brandID = $(item).data('brand-id');

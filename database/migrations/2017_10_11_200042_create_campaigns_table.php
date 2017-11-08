@@ -16,7 +16,9 @@ class CreateCampaignsTable extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->timestamps();
+            // $table->boolean('locked')->default(0);
+            // $table->boolean('live')->default(0);
+            $table->timestamps()->useCurrent();
         });
     }
 

@@ -1,10 +1,3 @@
-<div class="well">
-    <ul>
-        <li>Select store to be inlcuded in this campaign.</li>
-        <li>Select brands and insert brand exit url</li>
-    </ul>
-</div>
-
 <div id="store-list-campaign" class="scroll-content-box">
     <ul class="list-group">
         @foreach ($storeList as $store)

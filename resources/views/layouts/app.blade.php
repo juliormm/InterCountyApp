@@ -50,7 +50,11 @@
                        {{--     <li class="{{ Request::is('campaign/create') ? 'active' : '' }}">
                             <a href="{{ url('/campaigns/create') }}">Add Campaign</a>
                         </li> --}}
+             @if(Auth::user()->name === 'Julio' || Auth::user()->name === 'admin')
+         
+                        
 
+                  
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                    Add Campaign <span class="caret"></span>
@@ -68,8 +72,8 @@
                                                         
                             </ul>
                         </li>
-
-
+    
+          @endif
                         
 
 
@@ -80,7 +84,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 @foreach ($campaignsList as $campaign)
                                 <li>
-                                    <a href="{{ url('/campaigns/'.$campaign->id.'/edit') }}">{{ $campaign->name }}</a>
+                                    <a href="{{ url('/campaigns/'.$campaign->id.'/status') }}">{{ $campaign->name }}</a>
                                 </li>
                                 @endforeach  
                                                         
@@ -115,9 +119,10 @@
                 </div>
             </div>
         </nav>
-        @yield('tab-nav') @yield('content')
+        @yield('content')
+        @include ('footer')
     </div>
-    @include ('footer')
+   
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

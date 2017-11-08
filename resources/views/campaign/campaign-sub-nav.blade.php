@@ -1,8 +1,10 @@
-<div class="container bottom-spacer">
+<div class="bottom-spacer">
 	<ul class="nav nav-tabs">
-	  <li role="presentation" class="{{ Request::is('campaigns/'.$currentCampaign.'/edit') ? 'active' : '' }}"><a href="{{ url('/campaigns/'.$currentCampaign.'/edit') }}">{{ $campaignName }}'s Stores</a></li>
+	 
 
-	  <li role="presentation" class="{{ Request::is('campaigns/'.$currentCampaign.'/status') ? 'active' : '' }}"><a href="{{ url('/campaigns/'.$currentCampaign.'/status') }}">{{ $campaignName }} Status</a></li>
+	  <li role="presentation" class="{{ Request::is('campaigns/'.$campaignObj->id.'/status') ? 'active' : '' }}"><a href="{{ url('/campaigns/'.$campaignObj->id.'/status') }}">Status</a></li>
+
+	   <li role="presentation" class="{{ Request::is('campaigns/'.$campaignObj->id.'/edit') ? 'active' : '' }}"><a href="{{ url('/campaigns/'.$campaignObj->id.'/edit') }}">Stores</a></li>
 
 
 {{-- 	  <li role="presentation" class="{{ Request::is('stores') ? 'active' : '' }}"><a href="{{ url('/stores') }}">Store List</a></li>

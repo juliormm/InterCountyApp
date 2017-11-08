@@ -1,7 +1,3 @@
-<h3 class="text-center">Campaign Status <span class="badge">{{ count($groupedStores) }}</span> </h3>
-
-
-
 <div id="store-list-campaign" class="scroll-content-box">
     <ul class="list-group">
         @foreach ($groupedStores as $key => $store)

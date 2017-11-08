@@ -47,14 +47,17 @@ class CampaignController extends Controller
     public function status($id)
     {
         // var_export(\Illuminate\Support\Facades\DB::getQueryLog());
-        $currentCampaign = $id;
+        $campaignObj = Campaign::where('id', $id)->first();
+       
         // $brandList       = Brand::orderBy('name', 'asc')->pluck('name', 'id');
         // $uStores         = DB::table('assigned')->where('campaign_id', $id)->get();
         $uStores = Assigned::where('campaign_id', $id)->with(array('tracking' => function ($query) use ($id) {
             $query->where('campaign_id', $id);
         }))->with('brand')->get();
 
-        $grouped = $uStores->groupBy('store_id');
+         // print_r($uStores->toArray());
+
+        $grouped = $uStores->groupBy('store_name')->sort();
 
         $groupedStores = $grouped->map(function ($item, $key) {
             $arr = [];
@@ -68,11 +71,11 @@ class CampaignController extends Controller
             });
 
             $arr['brands'] = $data->toArray();
-            return $arr;
+            return collect($arr);
         });
 
 
-         $campaignName = Campaign::where('id', $id)->value('name');
+         
 
         // print_r($groupedStores->toArray());
         
@@ -81,12 +84,14 @@ class CampaignController extends Controller
         //     'brandList' => $brandList,
         //     'appURL' => env("APP_URL", "http://localhost")
         // ]);
-        return view('campaign.campaign-status', compact('currentCampaign', 'groupedStores', 'campaignName'));
+        return view('campaign.campaign-status', compact('campaignObj', 'groupedStores'));
     }
 
     public function edit($id)
     {
-        $currentCampaign = $id;
+        $campaignObj = Campaign::where('id', $id)->first();
+        
+
         $brandList       = Brand::orderBy('name', 'asc')->pluck('name', 'id');
         $uStores         = DB::table('assigned')->where('campaign_id', '=', $id)->get();
         $grouped         = $uStores->groupBy('store_id');
@@ -95,19 +100,19 @@ class CampaignController extends Controller
             $cID   = $arr->pluck('campaign_id')[0];
             $track = Tracking::where('campaign_id', $cID)->where('store_id', $key)->first();
             $crvID = ($track) ? $track->creative_id : '';
-            $ret   = ['creative_id' => $crvID, 'brand' => $arr->pluck('exit_url', 'brand_id')];
+            $ret   = collect(['creative_id' => $crvID, 'brand' => $arr->pluck('exit_url', 'brand_id')]);
             return $ret;
         });
 
-        $campaignName = Campaign::where('id', $id)->value('name');
+       
 
         JavaScript::put([
             'dData'     => $campaignData,
             'brandList' => $brandList,
             'currCamp' => $id,
-            'appURL'    => env("APP_URL"),
+            'appURL'    => env('APP_URL', 'http://205.186.128.213/apps/InterCounty/'),
         ]);
-        return view('campaign.campaign-edit', compact('currentCampaign', 'campaignData', 'brandList', 'campaignName'));
+        return view('campaign.campaign-edit', compact('campaignObj', 'campaignData', 'brandList'));
     }
 
     public function removeStore(Request $request, $id)
