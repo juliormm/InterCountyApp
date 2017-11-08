@@ -55,7 +55,7 @@ class DuplicateCampaign extends Command
                  $newCamp->name = $newCampName;
                  $newCamp->save();
 
-                 $status = DuplicateCampaignAssigned::insertData($grouped, $newCamp->id);
+                 $status = DuplicateCampaign::insertData($grouped, $newCamp->id);
                 $this->info("New Campaign Created");
             } else {
 
@@ -73,7 +73,7 @@ class DuplicateCampaign extends Command
                                 $AssignedDelete = Assigned::destroy($storeIDs->toArray());
                                 $trackingDelete = Tracking::where('campaign_id', $repCamp)->delete();
 
-                                $status = DuplicateCampaignAssigned::insertData($grouped, $repCamp);
+                                $status = DuplicateCampaign::insertData($grouped, $repCamp);
                                 $this->info("Campaign Updated");
 
                              } else {
