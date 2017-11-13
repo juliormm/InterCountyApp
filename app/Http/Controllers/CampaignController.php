@@ -57,7 +57,11 @@ class CampaignController extends Controller
 
          // print_r($uStores->toArray());
 
-        $grouped = $uStores->groupBy('store_name')->sort();
+        $grouped = $uStores->sortBy('store_name')->groupBy('store_name');
+
+
+         // print_r($grouped->toArray());
+
 
         $groupedStores = $grouped->map(function ($item, $key) {
             $arr = [];
@@ -93,7 +97,7 @@ class CampaignController extends Controller
         
 
         $brandList       = Brand::orderBy('name', 'asc')->pluck('name', 'id');
-        $uStores         = DB::table('assigned')->where('campaign_id', '=', $id)->get();
+        $uStores         = Assigned::where('campaign_id', $id)->get();
         $grouped         = $uStores->groupBy('store_id');
 
         $campaignData = $grouped->map(function ($arr, $key) {
@@ -104,7 +108,6 @@ class CampaignController extends Controller
             return $ret;
         });
 
-       
 
         JavaScript::put([
             'dData'     => $campaignData,

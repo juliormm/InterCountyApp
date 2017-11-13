@@ -42,7 +42,7 @@
                         </ul>
 
                         <ul class="nav navbar-nav">
-                            @if(Auth::user()->name === 'Julio1' || Auth::user()->name === 'admin1')
+                            @if(Auth::user()->name === 'Julio' || Auth::user()->name === 'admin')
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                            Add Campaign <span class="caret"></span>
