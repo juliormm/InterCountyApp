@@ -25,79 +25,61 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Intercounty Web App') }}
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    
-                    {{-- <p class="navbar-text">Stores:</p> --}}
-    
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <li class="{{ Request::is('stores') ? 'active' : '' }}">
-                            <a href="{{ url('/stores') }}">Store List</a>
-                        </li>
-                        <li class="{{ Request::is('stores/create') ? 'active' : '' }}">
-                            <a href="{{ url('/stores/create') }}">Add Store</a>
-                        </li>
-                        {{-- <li class="divider-vertical"></li> --}}
+                    @if (Auth::check())
+                        <!-- Left Side Of Navbar -->
+                        <ul class="nav navbar-nav">
+                            <li class="{{ Request::is('stores') ? 'active' : '' }}">
+                                <a href="{{ url('/stores') }}">Store List</a>
+                            </li>
+                            <li class="{{ Request::is('stores/create') ? 'active' : '' }}">
+                                <a href="{{ url('/stores/create') }}">Add Store</a>
+                            </li>
+                        </ul>
 
-                    </ul>
-                     {{-- <p class="navbar-text">Campaigns:</p> --}}
-                    <ul class="nav navbar-nav">
-                       {{--     <li class="{{ Request::is('campaign/create') ? 'active' : '' }}">
-                            <a href="{{ url('/campaigns/create') }}">Add Campaign</a>
-                        </li> --}}
-             @if(Auth::user()->name === 'Julio' || Auth::user()->name === 'admin')
-         
-                        
-
-                  
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   Add Campaign <span class="caret"></span>
-                                </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <form class="navbar-form navbar-left" id="add-campaign-form" action="/campaigns/create" method="POST">
-                                         {{ csrf_field() }}
-                                          <div class="form-group">
-                                            <input type="text" class="form-control" name="name" placeholder="Campaign Name">
-                                          </div>
-                                      <button type="submit" class="btn btn-default">Add</button>
-                                    </form>
-                                </li>  
-                                                        
-                            </ul>
-                        </li>
-    
-          @endif
-                        
-
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   Select Campaign <span class="caret"></span>
-                                </a>
-                            <ul class="dropdown-menu" role="menu">
-                                @foreach ($campaignsList as $campaign)
-                                <li>
-                                    <a href="{{ url('/campaigns/'.$campaign->id.'/status') }}">{{ $campaign->name }}</a>
+                        <ul class="nav navbar-nav">
+                            @if(Auth::user()->name === 'Julio1' || Auth::user()->name === 'admin1')
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                           Add Campaign <span class="caret"></span>
+                                        </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <form class="navbar-form navbar-left" id="add-campaign-form" action="/campaigns/create" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="name" placeholder="Campaign Name">
+                                                </div>
+                                                <button type="submit" class="btn btn-default">Add</button>
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </li>
-                                @endforeach  
-                                                        
-                            </ul>
-                        </li>
-                    </ul>
+                            @endif
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                       Select Campaign <span class="caret"></span>
+                                    </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    @foreach ($campaignsList as $campaign)
+                                    <li>
+                                        <a href="{{ url('/campaigns/'.$campaign->id.'/status') }}">{{ $campaign->name }}</a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        {{--
-                        <li><a href="{{ route('register') }}">Register</a></li> --}} @else
+                        @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -119,10 +101,8 @@
                 </div>
             </div>
         </nav>
-        @yield('content')
-        @include ('footer')
+        @yield('content') @include ('footer')
     </div>
-   
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
