@@ -12,8 +12,7 @@ class Assigned extends Model
 {
 
 	protected $table = 'assigned';
-    public $timestamps = false;
-    protected $hidden = ['id', 'tracking', 'store', 'brand', 'campaign_id'];
+    protected $hidden = ['id', 'tracking', 'store', 'brand', 'campaign_id', 'created_at', 'updated_at'];
     protected $appends = ['creativeid', 'impressions', 'store_logo', 'store_default_phone', 'store_name', 'brand_name'];
 
     public function store()

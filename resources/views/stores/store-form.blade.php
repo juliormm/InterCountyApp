@@ -26,6 +26,10 @@
                     <label for="name">Default Phone</label>
                     <input class="form-control" placeholder="xxx xxx xxxx" name="default_phone" type="text" value="{{ old('default_phone', $store->default_phone) }}">
                 </div>
+                 <div class="form-group">
+                    <label for="name">Web Page URL</label>
+                    <input class="form-control" placeholder="www.mystore.com" name="weburl" type="text" value="{{ old('weburl', $store->web_url) }}">
+                </div>
                 <h4>Add up to 5 locations</h4>
                 <div class="">
                     @for ($i = 0; $i < 5; $i++) <div class="well well-sm">

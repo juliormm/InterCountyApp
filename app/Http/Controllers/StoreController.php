@@ -130,6 +130,7 @@ class StoreController extends Controller
         $store = new Store;
         $store->name = $request->input('name');
         $store->default_phone = $request->input('default_phone');
+        $store->web_url = $request->input('weburl');
         $store->save();
 
         foreach ($request->input('locaction') as $key => $value) {

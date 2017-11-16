@@ -9,6 +9,9 @@
 
                 <div class="col-sm-3">
                     <div class="logo-thumb">
+                        @empty($store->logo)
+                            hello
+                        @endempty
                         <img class="logo-img" src="//quicktransmit.com/api/campaigns/_cdn/InterCountyApplianceGroupRINT041/store_logos/{{ $store->logo }}" alt="logo">
                     </div>
                     <div class="form-inline store-section">

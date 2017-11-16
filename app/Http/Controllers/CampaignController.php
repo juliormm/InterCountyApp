@@ -108,12 +108,13 @@ class CampaignController extends Controller
             return $ret;
         });
 
+        // print_r($campaignData->toArray());
 
         JavaScript::put([
-            'dData'     => $campaignData,
-            'brandList' => $brandList,
+            // 'dData'     => $campaignData,
+            // 'brandList' => $brandList,
             'currCamp' => $id,
-            'appURL'    => env('APP_URL', 'http://205.186.128.213/apps/InterCounty/'),
+            'appURL'    => env('APP_URL', 'test'),
         ]);
         return view('campaign.campaign-edit', compact('campaignObj', 'campaignData', 'brandList'));
     }
