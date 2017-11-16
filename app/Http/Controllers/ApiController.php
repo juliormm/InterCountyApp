@@ -29,7 +29,12 @@ class ApiController extends Controller
      public function live($campaign, $cid){
         $return = [];
 
-     	$data = Tracking::with('store.locations', 'store.assignedBrands')->where([['campaign_id', $campaign], ['creative_id', $cid]])->first();
+     	$data = Tracking::with(array('assigned' => function($query) use ($campaign){
+                    $query->where('campaign_id', 2);
+            }, 'store.locations'))->where([['campaign_id', $campaign], ['creative_id', $cid]])->first();
+
+        $storeInfo = $data['assigned'][$data['next_brand']];
+
 
         if(empty($data)){
             $return['status'] = 'FAILED';
@@ -37,9 +42,9 @@ class ApiController extends Controller
         } else {
             $return = $data->toArray();
             $next = $data['next_brand'];
-            $brandCount = count($data->store->assignedBrands);
-            $return['brand_id'] = $data->store->assignedBrands[$next]->id;
-            $return['exit_url'] = $data->store->assignedBrands[$next]->pivot->exit_url;
+            $brandCount = count($data['assigned']);
+            $return['brand_id'] = $storeInfo['brand_id'];
+            $return['exit_url'] = $storeInfo['exit_url'];
 
             if($next+1 < $brandCount){
                 $data->next_brand = $next+1;
