@@ -26,10 +26,10 @@
     }
 }
 
-input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  margin: 0; 
+  margin: 0;
 }
 
 .scroll-content-box {
@@ -78,7 +78,7 @@ input[type=number]::-webkit-outer-spin-button {
 	.well.new-item {
 		background-color:#dff0d8;
 	}
-	
+
 }
 
 .bottom-spacer {
@@ -140,7 +140,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 // LOADING
-// 
+//
 .spinner {
     margin: auto;
     width: 100px;
@@ -625,3 +625,75 @@ input[type=number]::-webkit-outer-spin-button {
 
 }
 
+// =============================
+
+a.btn.store-edit-button {
+    display: block;
+}
+
+a.telephone-number {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+button.btn.close-locations,
+button.btn.show-locations {
+    margin-bottom: 10px;
+}
+
+ul.sub-list {
+    padding-left: 18px;
+}
+
+#store-list-campaign {
+
+    .panel.simple-panel.campaign-panel {
+        border-bottom: 0;
+    }
+
+    :first-child {
+        .panel.simple-panel.campaign-panel {
+            border-top-right-radius: $border-radius;
+            border-top-left-radius: $border-radius;
+        }
+    }
+
+    :last-child {
+        .panel.simple-panel.campaign-panel {
+            border-bottom-right-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+            border: 1px solid $campaign-panel-border-color;
+        }
+    }
+}
+
+.campaign-panel-container {
+    .panel.simple-panel.campaign-panel {
+        background-color: $campaign-panel-bg-color;
+        border: 1px solid $campaign-panel-border-color;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 768px) {
+
+    a.btn.store-edit-button {
+        display: inline-block;
+    }
+
+    button.btn.show-locations,
+    .panel.simple-panel.mb-0,
+    a.telephone-number {
+        margin-bottom: 0;
+    }
+
+    h3.store-name {
+        margin-top: 0;
+    }
+
+    .flex-row {
+        display: flex;
+        align-items: center;
+    }
+}
