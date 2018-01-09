@@ -1,0 +1,900 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: 205.186.128.213 (MySQL 5.5.56-MariaDB)
+# Database: clients_InterCountyApp
+# Generation Time: 2018-01-06 05:14:33 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table assigned
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `assigned`;
+
+CREATE TABLE `assigned` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `campaign_id` int(10) unsigned NOT NULL,
+  `store_id` int(10) unsigned NOT NULL,
+  `brand_id` int(10) unsigned NOT NULL,
+  `exit_url` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assigned_campaign_id_foreign` (`campaign_id`),
+  KEY `assigned_store_id_foreign` (`store_id`),
+  KEY `assigned_brand_id_foreign` (`brand_id`),
+  CONSTRAINT `assigned_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
+  CONSTRAINT `assigned_campaign_id_foreign` FOREIGN KEY (`campaign_id`) REFERENCES `campaigns` (`id`),
+  CONSTRAINT `assigned_store_id_foreign` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `assigned` WRITE;
+/*!40000 ALTER TABLE `assigned` DISABLE KEYS */;
+
+INSERT INTO `assigned` (`id`, `campaign_id`, `store_id`, `brand_id`, `exit_url`)
+VALUES
+	(67,1,36,4,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(68,1,36,3,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(69,1,36,5,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(70,1,20,2,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(72,1,20,7,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(73,1,20,3,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(74,1,20,5,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(75,1,9,6,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(76,1,9,8,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(77,1,9,7,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(78,1,9,5,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(79,1,15,4,'https://www.appliancesalesplus.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(80,1,15,7,'https://www.appliancesalesplus.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(81,1,15,3,'https://www.appliancesalesplus.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(82,1,15,5,'https://www.appliancesalesplus.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(83,1,45,6,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(84,1,45,4,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(86,1,45,3,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(87,1,45,5,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(88,1,48,6,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(89,1,48,8,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(90,1,48,4,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(91,1,48,3,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(93,1,44,4,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(94,1,44,5,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(95,1,44,7,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(96,1,23,6,'https://www.countytv.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(97,1,23,4,'https://www.countytv.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(98,1,23,7,'https://www.countytv.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(99,1,23,5,'https://www.countytv.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(101,1,25,8,'https://www.cumminsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(102,1,25,4,'https://www.cumminsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(103,1,25,3,'https://www.cumminsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(104,1,37,6,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(105,1,37,8,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(106,1,37,7,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(107,1,37,3,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(113,1,6,2,'https://www.elgot.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(114,1,6,4,'https://www.elgot.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(115,1,6,7,'https://www.elgot.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(116,1,6,3,'https://www.elgot.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(117,1,43,6,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(118,1,43,4,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(119,1,43,7,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(120,1,43,3,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(121,1,1,6,'https://www.hallocks.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(122,1,1,4,'https://www.hallocks.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(123,1,1,7,'https://www.hallocks.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(124,1,1,5,'https://www.hallocks.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(125,1,4,6,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(126,1,4,8,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(127,1,4,4,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(128,1,4,3,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(133,1,5,8,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(134,1,5,7,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(135,1,5,3,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(136,1,5,5,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(137,1,10,6,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(138,1,10,4,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(139,1,10,7,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(140,1,10,3,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(141,1,35,4,'https://www.jenkelec.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(142,1,35,8,'https://www.jenkelec.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(143,1,35,3,'https://www.jenkelec.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(144,1,35,7,'https://www.jenkelec.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(145,1,41,4,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(146,1,41,7,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(147,1,41,3,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(148,1,41,5,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(149,1,13,6,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(150,1,13,7,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(151,1,13,3,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(152,1,13,5,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(153,1,21,8,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(154,1,21,7,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(155,1,21,3,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(156,1,21,5,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(157,1,18,6,'https://www.lenharris.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(158,1,18,4,'https://www.lenharris.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(159,1,18,7,'https://www.lenharris.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(160,1,18,3,'https://www.lenharris.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(161,1,34,6,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(162,1,34,8,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(163,1,34,3,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(164,1,34,4,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(165,1,32,8,'https://www.maidencreektvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(166,1,32,4,'https://www.maidencreektvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(167,1,32,7,'https://www.maidencreektvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(168,1,32,3,'https://www.maidencreektvandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(173,1,50,6,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(174,1,50,8,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(175,1,50,4,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(176,1,50,3,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(177,1,2,6,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(178,1,2,4,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(179,1,2,3,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(180,1,2,5,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(181,1,39,5,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(182,1,39,3,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(183,1,39,7,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(184,1,39,8,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(185,1,49,6,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(186,1,49,8,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(187,1,49,7,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(188,1,49,3,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(189,1,30,6,'https://www.olums.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(190,1,30,4,'https://www.olums.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(191,1,30,7,'https://www.olums.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(192,1,30,5,'https://www.olums.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(193,1,28,8,'https://www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=Frigidaire&utm_content=Frigidaire'),
+	(194,1,28,2,'https://www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=Fisher-Paykel&utm_content=Fisher-Paykel'),
+	(196,1,28,3,'https://www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=KitchenAid&utm_content=KitchenAid'),
+	(197,1,31,6,'https://www.planettv.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(198,1,31,4,'https://www.planettv.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(199,1,31,7,'https://www.planettv.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(200,1,31,3,'https://www.planettv.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(201,1,26,6,'https://www.plessers.com/Samsung-Appliances.htm'),
+	(202,1,26,8,'https://www.plessers.com/Frigidaire_Professional-Appliances.htm'),
+	(203,1,26,4,'https://www.plessers.com/Lg-Appliances.htm'),
+	(204,1,26,7,'https://www.plessers.com/Whirlpool-Appliances.htm'),
+	(205,1,46,6,'https://www.shopprisco.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(206,1,46,8,'https://www.shopprisco.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(207,1,46,2,'https://www.shopprisco.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(208,1,46,7,'https://www.shopprisco.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(209,1,47,6,'https://www.swtvappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(210,1,47,8,'https://www.swtvappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(211,1,47,4,'https://www.swtvappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(212,1,47,7,'https://www.swtvappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(213,1,12,6,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(214,1,12,2,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(215,1,12,4,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(216,1,12,7,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(217,1,42,8,'https://www.spichers.com//promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(218,1,42,7,'https://www.spichers.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(219,1,42,3,'https://www.spichers.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(220,1,42,5,'https://www.spichers.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(222,1,19,4,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(223,1,19,7,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(224,1,19,3,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(226,1,33,4,'https://www.tristateinteriorsny.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(227,1,33,7,'https://www.tristateinteriorsny.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(228,1,33,3,'https://www.tristateinteriorsny.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(230,1,17,7,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(231,1,17,3,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(232,1,17,5,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(234,1,11,7,'https://www.woodburyappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(235,1,11,3,'https://www.woodburyappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(236,1,11,5,'https://www.woodburyappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(237,1,51,8,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(238,1,51,2,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(239,1,51,4,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(240,1,51,7,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(241,1,7,6,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(242,1,7,4,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(243,1,7,7,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(244,1,7,5,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(245,1,52,6,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(246,1,52,4,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(247,1,52,7,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(248,1,52,5,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(249,1,53,8,'https://www.shoretv.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(250,1,53,4,'https://www.shoretv.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(251,1,53,7,'https://www.shoretv.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(252,1,53,3,'https://www.shoretv.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(253,1,54,6,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(254,1,54,8,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(255,1,54,3,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(257,1,55,8,'https://www.townappliance.com/frigidaire.html/?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(258,1,55,4,'https://www.townappliance.com/lg.html/?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(259,1,55,3,'https://www.townappliance.com/kitchenaid.html/?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(260,1,55,7,'https://www.townappliance.com/whirlpool.html/?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(277,1,27,2,'https://www.marcellasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(278,1,27,5,'https://www.marcellasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(279,1,27,6,'https://www.marcellasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(281,1,27,8,'https://www.marcellasappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(283,1,36,8,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(284,1,8,6,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(285,1,8,4,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/lg/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(286,1,8,7,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(288,1,8,5,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(289,1,28,7,'https://www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=Whirpool&utm_content=Whirlpool'),
+	(290,1,14,6,'https://www.swappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(291,1,14,8,'https://www.swappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(292,1,14,2,'https://www.swappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(293,1,14,3,'https://www.swappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(295,1,54,5,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(296,1,38,8,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(297,1,38,5,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/maytag/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(298,1,38,6,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(299,1,38,7,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/whirlpool/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(300,1,44,8,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(301,1,25,2,'https://www.cumminsappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(303,1,19,2,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(304,1,33,5,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(305,1,17,8,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(306,1,11,8,'https://www.woodburyappliance.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(307,1,29,6,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-preblack-friday-event/samsung/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(308,1,29,8,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-preblack-friday-event/frigidaire/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(309,1,29,3,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-preblack-friday-event/kitchenaid/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(311,1,29,2,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-preblack-friday-event/fisherpaykel/savings.html?utm_source=PreBlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(312,2,36,4,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(313,2,36,3,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(314,2,36,5,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(315,2,36,8,'https://www.abcdiscountappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(316,2,20,2,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(317,2,20,7,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(318,2,20,3,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(319,2,20,5,'https://www.allentownappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(320,2,9,6,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(321,2,9,8,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(322,2,9,7,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(323,2,9,5,'https://www.appliancetvdiscounters.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(324,2,15,4,'http://www.appliancesalesplus.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(325,2,15,7,'http://www.appliancesalesplus.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(326,2,15,3,'http://www.appliancesalesplus.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(327,2,15,5,'http://www.appliancesalesplus.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(328,2,45,6,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(329,2,45,4,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(330,2,45,3,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(331,2,45,5,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(332,2,48,6,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(333,2,48,8,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(334,2,48,4,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(335,2,48,3,'https://www.bobcocciasappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(336,2,44,4,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(337,2,44,5,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(338,2,44,7,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(339,2,44,8,'https://www.wesellappliances.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(340,2,23,6,'https://www.countytv.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(341,2,23,4,'https://www.countytv.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(342,2,23,7,'https://www.countytv.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(343,2,23,5,'https://www.countytv.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(348,2,37,6,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(349,2,37,8,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(350,2,37,7,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(351,2,37,3,'https://www.dunriteappliances.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(352,2,6,2,'https://www.elgot.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(353,2,6,4,'https://www.elgot.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(354,2,6,7,'https://www.elgot.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(355,2,6,3,'https://www.elgot.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(356,2,43,6,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(357,2,43,4,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(358,2,43,7,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(359,2,43,3,'https://www.gerhardsappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(360,2,1,6,'https://www.hallocks.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(361,2,1,4,'https://www.hallocks.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(362,2,1,7,'https://www.hallocks.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(363,2,1,5,'https://www.hallocks.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(364,2,4,6,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(365,2,4,8,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(366,2,4,4,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(367,2,4,3,'https://www.hamptonapplianceny.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(368,2,5,8,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(369,2,5,7,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(370,2,5,3,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(371,2,5,5,'https://www.jarvisappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(372,2,10,6,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(373,2,10,4,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(374,2,10,7,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(375,2,10,3,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(376,2,35,4,'https://www.jenkelec.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(377,2,35,8,'https://www.jenkelec.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(378,2,35,3,'https://www.jenkelec.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(379,2,35,7,'https://www.jenkelec.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(380,2,41,4,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(381,2,41,7,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(382,2,41,3,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(383,2,41,5,'https://www.johnniesappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(384,2,13,6,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(385,2,13,7,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(386,2,13,3,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(387,2,13,5,'https://www.karlsappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(388,2,21,8,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(389,2,21,7,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(390,2,21,3,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(391,2,21,5,'https://www.lambcotvandappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(392,2,18,6,'https://www.lenharris.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(393,2,18,4,'https://www.lenharris.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(394,2,18,7,'https://www.lenharris.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(395,2,18,3,'https://www.lenharris.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(396,2,34,6,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(397,2,34,8,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(398,2,34,3,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(399,2,34,4,'https://www.mandmappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(400,2,32,8,'http://www.maidencreektvandappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(401,2,32,4,NULL),
+	(402,2,32,7,'http://www.maidencreektvandappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(403,2,32,3,'http://www.maidencreektvandappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(404,2,50,6,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(405,2,50,8,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(406,2,50,4,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(407,2,50,3,'https://www.northernhomeappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(408,2,2,6,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(409,2,2,4,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(410,2,2,3,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(411,2,2,5,'https://www.millmansappliances.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(412,2,39,5,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(413,2,39,3,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(414,2,39,7,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(415,2,39,8,'https://www.mrjayappliances.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(416,2,49,6,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(417,2,49,8,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(418,2,49,7,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(419,2,49,3,'https://www.newenglandappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(420,2,30,6,'https://www.olums.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(421,2,30,4,'https://www.olums.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(422,2,30,7,'https://www.olums.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(423,2,30,5,'https://www.olums.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(424,2,28,8,'www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=Frigidaire&utm_content=Frigidaire'),
+	(425,2,28,2,'www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=Fisher-Paykel&utm_content=Fisher-Paykel'),
+	(426,2,28,3,'www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=KitchenAid&utm_content=KitchenAid'),
+	(427,2,28,7,'www.percys.com/promotion?utm_source=google&utm_medium=display&utm_campaign=black_friday&utm_term=Whirpool&utm_content=Whirlpool'),
+	(428,2,31,6,'https://www.planettv.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(429,2,31,4,'https://www.planettv.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(430,2,31,7,'https://www.planettv.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(431,2,31,3,'https://www.planettv.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(432,2,26,6,'https://www.plessers.com/Samsung-Appliances.htm'),
+	(433,2,26,8,'https://www.plessers.com/Frigidaire_Professional-Appliances.htm'),
+	(434,2,26,4,'https://www.plessers.com/Lg-Appliances.htm'),
+	(435,2,26,7,'https://www.plessers.com/Whirlpool-Appliances.htm'),
+	(436,2,46,6,'https://www.shopprisco.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(437,2,46,8,'https://www.shopprisco.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(438,2,46,2,'https://www.shopprisco.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(439,2,46,7,'https://www.shopprisco.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(440,2,47,6,'https://www.beachsalesinc.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(441,2,47,8,'https://www.swappliances.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(442,2,47,4,'https://www.swtvappliances.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(443,2,47,7,'https://www.swtvappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(444,2,12,6,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(445,2,12,2,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(446,2,12,4,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(447,2,12,7,'https://www.schumachersappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(448,2,42,8,'http://www.spichers.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(449,2,42,7,'http://www.spichers.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(450,2,42,3,'http://www.spichers.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(451,2,42,5,'http://www.spichers.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(452,2,19,4,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(453,2,19,7,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(454,2,19,3,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(455,2,19,2,'https://www.sterlingappliance.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(456,2,33,4,'http://www.tristateinteriorsny.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(457,2,33,7,'http://www.tristateinteriorsny.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(458,2,33,3,'http://www.tristateinteriorsny.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(459,2,33,5,'http://www.tristateinteriorsny.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(460,2,17,7,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(461,2,17,3,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(462,2,17,5,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(463,2,17,8,'https://www.watertownapplianceandtv.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(464,2,11,7,'http://www.woodburyappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(465,2,11,3,'http://www.woodburyappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(466,2,11,5,'http://www.woodburyappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(467,2,11,8,'http://www.woodburyappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(468,2,51,8,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(469,2,51,2,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(470,2,51,4,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(471,2,51,7,'https://www.ahcappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(472,2,7,6,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(473,2,7,4,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(474,2,7,7,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(475,2,7,5,'https://www.appliancesplusvideo.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(476,2,52,6,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(477,2,52,4,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(478,2,52,7,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(479,2,52,5,'https://www.dominicsappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(480,2,53,8,'https://www.shoretv.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(481,2,53,4,'https://www.shoretv.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(482,2,53,7,'https://www.shoretv.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(483,2,53,3,'https://www.shoretv.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(484,2,54,6,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(485,2,54,8,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(486,2,54,3,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(487,2,54,5,'https://www.theoriginallakesappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(488,2,55,8,'http://www.townappliance.com/frigidaire.html/?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(489,2,55,4,'http://www.townappliance.com/lg.html/?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(490,2,55,3,'http://www.townappliance.com/kitchenaid.html/?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(491,2,55,7,'http://www.townappliance.com/whirlpool.html/?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(492,2,27,2,'http://www.marcellasappliance.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(493,2,27,5,'http://www.marcellasappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(494,2,27,6,'http://www.marcellasappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(495,2,27,8,'http://www.marcellasappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(496,2,8,6,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(497,2,8,4,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(498,2,8,7,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(499,2,8,5,'https://www.parkaveappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(500,2,14,6,'https://www.swappliances.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(501,2,14,8,'https://www.swappliances.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(502,2,14,2,'https://www.swappliances.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(503,2,14,3,'https://www.swappliances.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(504,2,38,8,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(505,2,38,5,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(506,2,38,6,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(507,2,38,7,'https://www.izschwartzappliance.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(508,2,29,6,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-black-friday-event/samsung/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(509,2,29,8,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(510,2,29,3,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(511,2,29,2,'https://www.earlbfeiden.com/promotions/neco/iac/2017-11-black-friday-event/fisherpaykel/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(513,2,22,8,'https://www.betterelectricappliances.com/promotions/neco/iac/2017-11-black-friday-event/frigidaire/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(514,2,22,7,'https://www.betterelectricappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(515,2,22,3,'https://www.betterelectricappliances.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(516,2,22,5,'https://www.betterelectricappliances.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(517,2,16,6,'https://www.betterelectricappliances.com/promotions/neco/iac/2017-11-black-friday-event/maytag/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(518,2,16,4,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-black-friday-event/lg/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(519,2,16,7,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-black-friday-event/whirlpool/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC'),
+	(520,2,16,3,'https://www.jaysappliances.com/promotions/neco/iac/2017-11-black-friday-event/kitchenaid/savings.html?utm_source=BlackFriday&utm_medium=Display&utm_campaign=IC');
+
+/*!40000 ALTER TABLE `assigned` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table brands
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `brands`;
+
+CREATE TABLE `brands` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `brands_name_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `brands` WRITE;
+/*!40000 ALTER TABLE `brands` DISABLE KEYS */;
+
+INSERT INTO `brands` (`id`, `name`)
+VALUES
+	(1,'Bosch'),
+	(2,'F&P'),
+	(8,'Frigidaire Professional'),
+	(3,'KitchenAid'),
+	(4,'LG'),
+	(5,'Maytag'),
+	(6,'Samsung'),
+	(7,'Whirlpool');
+
+/*!40000 ALTER TABLE `brands` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table campaigns
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `campaigns`;
+
+CREATE TABLE `campaigns` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locked` tinyint(1) NOT NULL DEFAULT '0',
+  `live` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `campaigns_name_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `campaigns` WRITE;
+/*!40000 ALTER TABLE `campaigns` DISABLE KEYS */;
+
+INSERT INTO `campaigns` (`id`, `name`, `locked`, `live`, `created_at`, `updated_at`)
+VALUES
+	(1,'Pre-Black Friday 2017',0,0,'2017-10-12 10:21:24','2017-10-12 10:21:24'),
+	(2,'Black Friday 2017',0,0,'2017-11-08 21:11:33','2017-11-08 21:11:33');
+
+/*!40000 ALTER TABLE `campaigns` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table locations
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `locations`;
+
+CREATE TABLE `locations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `store_id` int(10) unsigned NOT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `locations` WRITE;
+/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+
+INSERT INTO `locations` (`id`, `store_id`, `latitude`, `longitude`, `address`, `phone`, `created_at`, `updated_at`)
+VALUES
+	(1,1,41.27575940,-72.83618600,'885 West Main St. Branford, CT. 06450','2034882527','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(2,1,41.29038390,-72.82003490,'174 Cedar St. Branford, CT. 06450','2032081365','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(3,2,38.73481100,-75.23736020,'28841 Lewes Georgetown Highway Lewes, DE 19958','3026456215','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(4,3,40.63253810,-73.65571220,'3050 Long Beach Rd, Oceanside, NY 11572','5166781190','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(5,4,40.73211750,-73.60592370,'750 Stewart Avenue, Garden City NY 11530','5162229100','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(6,5,39.60187310,-76.48477810,'3802 Norrisville Road, Jarrettsville MD 21084','4105577378','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(7,6,40.77159900,-73.95966000,'1296 THIRD AVENUE NEW YORK, NY 10021','2128791200','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(8,7,39.45564210,-75.04247590,'2155 S. DELSEA DRIVE VINELAND, NJ 08360','8566921544','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(9,8,40.09122650,-74.20828620,'50 PARK AVE SOUTH LAKEWOOD, NJ 08701','7323673677','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(10,9,39.98271640,-75.10149580,'3177 Richmond St, Philadelphia, PA 19134','2154259000','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(11,10,40.72601320,-73.51892730,'3171 HEMPSTEAD TPKE LEVITTOWN, NY 11756','5167963232','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(12,11,39.82222450,-75.16195030,'753 MANTUA AVE WOODBURY, NJ 08096','8568453710','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(13,12,40.70115800,-73.89279200,'62-15 Myrtle Ave Glendale, NY 11385','7184974001','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(14,13,40.95290020,-74.07358730,'469 ROUTE 17 SOUTH, PARAMUS, NJ 07652','2012670820','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(15,13,40.86927040,-74.28060260,'65 PASSAIC AVENUE, FAIRFIELD, NJ 07004','9732271777','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(16,13,40.74981790,-74.39945570,'300 MAIN STREET, MADISON, NJ 07940','9733775000','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(17,13,40.77644440,-74.23767150,'557 MAIN STREET, ORANGE, NJ 07050','9733955555','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(18,14,40.69955290,-73.95646440,'162 Wallabout Street, Brooklyn NY 11206','7183878660','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(19,15,41.32720720,-73.72038010,'3 Lovell St, Somers NY 10589','8456285241','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(20,16,41.87711020,-71.53513140,'47 Cedar Swamp Rd. (Rt.5), Smithfield, RI 02917','4019497800','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(21,17,43.97565180,-75.90438840,'316 Factory Street Watertown NY 13601','3157820333','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(22,18,40.72348390,-73.80531200,'77-30 164th St, Fresh Meadows, NY 11366','7185916557','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(23,19,39.01325440,-77.37227890,'21800 TOWN CENTER PLAZA, SUITE 257, STERLING, VA 20164','7034505453','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(24,20,40.60380910,-75.49904570,'1824 W. Allen St. Allentown, PA 18104','6104398448','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(25,21,41.94193930,-71.28706150,'34 Wall Street, Attleboro, MA 02703','5082261150','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(26,21,41.66154310,-70.60691260,'1356 Route 28A, Cataumet, MA 02534','5085637050','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(27,22,42.25699530,-71.79115650,'190 Grafton St Worcester, MA 01604','5087533860','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(28,23,41.06962970,-73.54979010,'2770 Summer Street Stamford, CT 06905','2033272630','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(29,24,40.69181020,-73.83622250,'115-09 Liberty Ave., S Richmond Hill, NY 11419','7188057770','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(30,25,39.38207370,-76.73102180,'1708 Reisterstown Rd Baltimore, MD 21208','4104841333','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(31,26,40.69635320,-73.32289860,'6 East Main Street Babylon Village, NY 11702','6315393906','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(32,27,42.80633160,-73.94713190,'560 Broadway, Schenectady, NY 12305','5183811957','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(33,27,42.86487750,-73.77887950,'15 Park Avenue, Clifton Park, NY 12065','5189527700','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(34,28,42.28517220,-71.80624880,'19 Glennie Street Worcester MA 01605','5084386800','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(35,29,41.93028000,-74.00738210,'661 BROADWAY KINGSTON NY 12401','8453312230','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(36,29,42.74444790,-73.76172540,'785 RTE 9 LATHAM NY 12110','5187858555','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(37,29,42.87620270,-73.77390980,'1771 RTE 9 CLIFTON PARK NY 12065','5183832215','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(38,30,42.09820940,-75.98255500,'3701 Vestal Parkway East Vestal, NY 13850','6077295775','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(39,30,43.10983030,-76.14385070,'154 Northern Lights Plaza North Syracuse, NY 13212','3152147500','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(40,30,43.05119890,-76.07137890,'5775 Bridge Street, East Syracuse, NY 13057','3154142200','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(41,31,41.10217810,-73.54851560,'900 HIGH RIDGE RD STAMFORD, CT 06905','2039681515','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(42,32,40.44742770,-75.90055100,'8261 Allentown Pike Reading PA 19605','6109261911','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(43,33,40.84683290,-73.83319500,'2925 WESTCHESTER AVENUE BRONX, NY 10461','7188233400','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(44,34,38.96484980,-77.01171190,'6201 BLAIR ROAD N.W. WASHINGTON, DC 20011','2028827100','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(45,34,36.63479040,-81.85792640,'817 S. Washington Street Alex, VA 22314','7032990092','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(46,35,40.09488750,-75.12526740,'220 YORK ROAD JENKINTOWN, PA 19046','2158841050','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(47,36,39.93586320,-75.06092140,'6013 Mansion blvd Pennsauken NJ 08109','856-665-0711','2017-11-14 17:59:53','2017-10-19 21:52:01'),
+	(48,37,40.80043840,-72.79303120,'365 Main St, Center Moriches NY 11934','6318785600','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(49,38,41.72719310,-71.15862680,'110 Slades Ferry Avenue Somerset, MA 02726','5086743511','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(50,39,40.75456790,-73.65151430,'294 Hillside Ave Williston Park NY 11596','5162486767','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(51,40,40.85555580,-73.19566910,'25 E Main St., Smithtown, NY 11787','6312652270','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(52,41,39.83797980,-75.06942500,'419 Black Horse Pikey, Glendora, NJ 08029','8569310070','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(53,42,39.91352300,-77.66613100,'1611 Orchard Dr Chambersburg, PA 17201','7174147562','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(54,42,39.50080970,-78.01860860,'13427 Pennysylvania Ave., Hagerstown, MD','3017392794','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(55,42,39.14967130,-78.17718670,'2730 S PLEASANT VALLEY RD WINCHESTER VA 22601','5407229500','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(56,43,40.07945340,-75.02966860,'9475 E Roosevelt Blvd, Philadelphia, PA 19114','2156981492','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(57,44,39.93501830,-75.15710370,'1121 S 8TH ST, PHILADELPHIA PA 19147','2154679900','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(58,45,42.41079860,-70.99893840,'80 VFW PARKWAY REVERE, MA 02151','7812840130','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(59,46,41.04121450,-73.79211310,'247 Tarrytown Rd, White Plains, NY 10607','9149496464','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(60,47,41.80051750,-71.36288370,'2735 Pawtucket Avenue East Providence, RI 02914','4014381411','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(61,48,40.74756140,-73.76230740,'215-03 HORACE HARDING BLVD. BAYSIDE, NY 11364','7182244344','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(62,49,42.22233280,-71.03669880,'165 Wood Road Braintree, MA 02184','7818483933','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(63,50,40.66589790,-73.48960320,'3825 MERRICK ROAD SEAFORD NY 11783','5168267137','2017-11-14 17:59:53','2017-11-14 18:02:07'),
+	(64,51,40.62235040,-73.72334220,'530 Central Avenue Cedarhurst, NY 11516','5165691700','2017-10-20 17:21:01','2017-10-20 17:21:01'),
+	(65,52,39.92448200,-75.17614050,'1749 W Passyunk Ave., Philadelphia, PA 19145','2153349192','2017-10-20 17:30:43','2017-10-20 17:30:43'),
+	(66,53,41.38387950,-72.02211670,'1416 Gold Star Highway, Groton, CT 06340','8604452471','2017-10-20 17:40:07','2017-10-20 17:40:07'),
+	(67,53,41.27881950,-72.52650930,'11 East Main ST, Clinton, CT 06413','8606698007','2017-10-20 17:40:09','2017-10-20 17:40:09'),
+	(68,53,41.30846450,-72.38089010,'280 Middlesex Turnpike, Old Saybrook, CT 06475','8603883040','2017-10-20 17:40:10','2017-10-20 17:40:10'),
+	(69,54,39.87339010,-74.81332300,'560 Stokes Rd., Suite 2, Medford, NJ 08055','6096548667','2017-10-20 17:43:07','2017-10-20 17:43:07'),
+	(70,54,39.99295660,-74.79218420,'79A Washington St., Mt. Holly, NJ 08060','6092658888','2017-10-20 17:43:09','2017-10-20 17:43:09'),
+	(71,55,40.08961260,-74.21448510,'10 S Clifton Ave, Lakewood, NJ 08701','7323645195','2017-10-20 17:45:48','2017-10-20 17:45:48');
+
+/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table migrations
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `migrations`;
+
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`)
+VALUES
+	(12,'2014_10_12_000000_create_users_table',1),
+	(13,'2014_10_12_100000_create_password_resets_table',1),
+	(14,'2017_10_11_194255_create_stores_table',1),
+	(15,'2017_10_11_194315_create_locations_table',1),
+	(16,'2017_10_11_195841_create_brands_table',1),
+	(17,'2017_10_11_200042_create_campaigns_table',1),
+	(19,'2017_10_11_204404_create_campaign_store_table',2),
+	(24,'2017_10_12_163456_create_assigned_table',3),
+	(25,'2017_10_12_163303_create_tracking_table',4),
+	(26,'2017_11_07_234222_update_campaign_table',5);
+
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table password_resets
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `password_resets`;
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+# Dump of table stores
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `stores`;
+
+CREATE TABLE `stores` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ic_dealer_id` int(11) DEFAULT NULL,
+  `logo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `default_phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `stores` WRITE;
+/*!40000 ALTER TABLE `stores` DISABLE KEYS */;
+
+INSERT INTO `stores` (`id`, `name`, `ic_dealer_id`, `logo`, `default_phone`)
+VALUES
+	(1,'Hallock\'s',1550,'hallocks.png','2034882527'),
+	(2,'Millman\'s Appliances',2590,'millmans.png','3026456215'),
+	(3,'Home Appliance',NULL,'homeappliance.png','5166781190'),
+	(4,'Hampton Major Appliances & TV',1400,'hampton.png','5162229100'),
+	(5,'Jarvis Appliance',1860,'jarvis.png','4105577378'),
+	(6,'Elgot Kitchens',1220,'elgot.png','2128791200'),
+	(7,'Appliances Plus Inc.',400,'appliancesplus.png','8566921544'),
+	(8,'Park Ave Appliance',2725,'parkavenue.png','7323673677'),
+	(9,'Appliance & TV Discounters',1801,'discounters.png','2154259000'),
+	(10,'Jay\'s Appliances of Levittown',2200,'jays.png','5167963232'),
+	(11,'Woodbury Appliance',5000,'woodbury.png','8568453710'),
+	(12,'Schumacher\'s Appliances',2850,'schumachers.png','7184974001'),
+	(13,'Karl\'s Appliance',1925,'karls.png','2012670820'),
+	(14,'S&W Appliances',3400,'sw_ny.png','7183878660'),
+	(15,'Appliance Sales Plus',450,'appliancesalesplus.png','8456285241'),
+	(16,'J\'s Broadway Appliance & TV',NULL,'jsbroadway.png','4019497800'),
+	(17,'Watertown Appliance & TV Center',4000,'watertown.png','3157820333'),
+	(18,'Len Harris Appliances',1625,'lenharris.png','7185916557'),
+	(19,'Sterling Appliance',3645,'sterling.png','7034505453'),
+	(20,'Allentown Appliance',350,'allentown.png','6104398448'),
+	(21,'Lambco TV & Appliance',2225,'lambco.png','5082261150'),
+	(22,'Better Electric Appliances',NULL,'betterelectric.png','5087533860'),
+	(23,'County TV & Appliance',2250,'county.png','2033272630'),
+	(24,'Neighborhood Enterprises',NULL,'neighborhood.png','7188057770'),
+	(25,'Cummin\'s Appliance',885,'cummins.png','4104841333'),
+	(26,'Plesser\'s Appliance & Electronics',2910,'plessers.png','6315393906'),
+	(27,'Marcella\'s Appliance Center',1875,'marcellas.png','5183811957'),
+	(28,'Percy\'s TV & Appliance',2990,'percys.png','5084386800'),
+	(29,'Earl B Feiden Appliance',1125,'earlfeiden.png','8453312230'),
+	(30,'Olum\'s',2775,'olums.png','6077295775'),
+	(31,'Planet TV & Appliances',3110,'planet.png','2039681515'),
+	(32,'Maidencreek TV & Appliance',2400,'maidencreek.png','6109261911'),
+	(33,'Tri-State Interiors',NULL,'tristate.png','7188233400'),
+	(34,'M & M Appliance',2550,'mandm.png','2028827100'),
+	(35,'Jenkintown Electric',1815,'jenkintown.png','2158841050'),
+	(36,'ABC Discount Appliances',3775,'abc.png','8566650711'),
+	(37,'DunRite Appliance',1120,'dunrite.png','6318785600'),
+	(38,'IZ Schwartz Appliance',1760,'schwartz.png','5086743511'),
+	(39,'Mr. Jay Appliances',2600,'mrjay.png','5162486767'),
+	(40,'Smithtown Appliance',NULL,'smithtown.png','6312652270'),
+	(41,'Johnnie\'s Appliance',550,'johnnies.png','8569310070'),
+	(42,'Spicher\'s Appliances, Electronics, & Security',3550,'spichers.png','7174147562'),
+	(43,'Gerhard\'s Appliance',74366,'gerhards.png','2156981492'),
+	(44,'C & D Appliances',845,'candd.png','2154679900'),
+	(45,'Beach Sales Inc.',575,'beachsales.png','7812840130'),
+	(46,'Prisco Appliances',3150,'prisco.png','9149496464'),
+	(47,'S&W TV and Appliance Co.',3400,'sw_ri.png','4014381411'),
+	(48,'Bob Coccia\'s Appliance Clearance',125,'bobcoccias.png','7182244344'),
+	(49,'New England Appliance and More',2695,'newengland.png','7818483933'),
+	(50,'Marlin Appliance',650,'marlin.png','5168267137'),
+	(51,'AHC Appliances',410,'ahc.png','5165691700'),
+	(52,'Dominic\'s Appliances',1095,'dominics.png','2153349192'),
+	(53,'Shore TV & Appliances',3600,'shore.png','8604452471'),
+	(54,'The Original Lakes Appliance & TV',1650,'lakes.png','6096548667'),
+	(55,'Town Appliance',3925,'town.png','7323645195');
+
+/*!40000 ALTER TABLE `stores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table tracking
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tracking`;
+
+CREATE TABLE `tracking` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `creative_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `store_id` int(11) NOT NULL,
+  `campaign_id` int(11) NOT NULL,
+  `next_brand` int(11) NOT NULL DEFAULT '0',
+  `impressions` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `tracking` WRITE;
+/*!40000 ALTER TABLE `tracking` DISABLE KEYS */;
+
+INSERT INTO `tracking` (`id`, `creative_id`, `store_id`, `campaign_id`, `next_brand`, `impressions`)
+VALUES
+	(4,'138214978693',36,1,4,105884),
+	(6,'138215039243',51,1,1,105428),
+	(7,'138214978699',20,1,4,103651),
+	(8,'138214978702',9,1,4,100643),
+	(9,'138214978669',15,1,4,104839),
+	(10,'138215039246',7,1,1,139462),
+	(11,'138214977214',45,1,0,90311),
+	(12,'138214744375',48,1,0,107998),
+	(13,'138215048157',44,1,4,102907),
+	(14,'138215048517',23,1,4,127307),
+	(15,'138215048541',25,1,0,104667),
+	(16,'138215039249',52,1,2,99901),
+	(17,'138215048160',37,1,0,104115),
+	(19,'138215048547',6,1,2,107650),
+	(20,'138214989583',43,1,0,157175),
+	(21,'138214989589',1,1,0,105395),
+	(22,'138214989592',4,1,0,111191),
+	(23,'138214989601',38,1,4,101207),
+	(24,'138215039027',5,1,4,106467),
+	(25,'138215039036',10,1,0,105982),
+	(26,'138215039042',35,1,3,107786),
+	(27,'138215039048',41,1,1,100055),
+	(28,'138215039054',13,1,1,104728),
+	(29,'138214989619',21,1,1,104107),
+	(30,'138214989622',18,1,3,134454),
+	(31,'138214989625',34,1,2,99687),
+	(32,'138214990090',32,1,4,104287),
+	(33,'138215039267',27,1,2,99621),
+	(34,'138214990270',50,1,4,106299),
+	(35,'138214990273',2,1,1,110591),
+	(36,'138214990276',39,1,0,112175),
+	(37,'138214990279',49,1,4,90067),
+	(38,'138214990282',30,1,3,101574),
+	(39,'138215043233',8,1,2,106857),
+	(40,'138214990285',28,1,2,167933),
+	(41,'138214990288',31,1,2,107270),
+	(42,'138214990291',26,1,2,103897),
+	(43,'138214990294',46,1,2,108545),
+	(44,'138215043230',14,1,0,92019),
+	(45,'138214990297',47,1,3,104692),
+	(46,'138214990303',12,1,0,92802),
+	(47,'138215039255',53,1,3,102662),
+	(48,'138214990306',42,1,1,109194),
+	(49,'138214990309',19,1,4,108259),
+	(50,'138215039258',54,1,4,105559),
+	(51,'138215039261',55,1,2,103725),
+	(52,'138214990318',33,1,0,102891),
+	(53,'138214990321',17,1,2,110721),
+	(54,'138215039240',11,1,4,103451),
+	(55,'138215048526',29,1,1,103132),
+	(56,'138214978693',36,2,1,141022),
+	(57,'138214978699',20,2,0,152348),
+	(58,'138214978702',9,2,1,135979),
+	(59,'138214978669',15,2,1,134657),
+	(60,'138214977214',45,2,1,125521),
+	(61,'138214744375',48,2,2,140354),
+	(62,'138215048157',44,2,1,135873),
+	(63,'138215048517',23,2,2,196294),
+	(65,'138215048160',37,2,0,135879),
+	(66,'138215048547',6,2,2,145933),
+	(67,'138214989583',43,2,3,194871),
+	(68,'138214989589',1,2,1,143741),
+	(69,'138214989592',4,2,0,150797),
+	(70,'138215039027',5,2,3,143438),
+	(71,'138215039036',10,2,3,142000),
+	(72,'138215039042',35,2,3,144508),
+	(73,'138215039048',41,2,1,147109),
+	(74,'138215039054',13,2,2,139833),
+	(75,'138214989619',21,2,3,143423),
+	(76,'138214989622',18,2,3,180057),
+	(77,'138214989625',34,2,1,133972),
+	(78,'138214990090',32,2,3,141272),
+	(79,'138214990270',50,2,3,139299),
+	(80,'138214990273',2,2,1,154180),
+	(81,'138214990276',39,2,1,147810),
+	(82,'138214990279',49,2,3,143577),
+	(83,'138214990282',30,2,0,135627),
+	(84,'138214990285',28,2,1,142652),
+	(85,'138214990288',31,2,1,142718),
+	(86,'138214990291',26,2,0,134018),
+	(87,'138214990294',46,2,0,137981),
+	(88,'138214990297',47,2,2,143229),
+	(89,'138214990303',12,2,1,130972),
+	(90,'138214990306',42,2,0,139991),
+	(91,'138214990309',19,2,2,147407),
+	(92,'138214990318',33,2,3,143228),
+	(93,'138214990321',17,2,0,146028),
+	(94,'138215039240',11,2,3,142673),
+	(95,'138215039243',51,2,0,141177),
+	(96,'138215039246',7,2,0,186376),
+	(97,'138215039249',52,2,0,143686),
+	(98,'138215039255',53,2,3,145623),
+	(99,'138215039258',54,2,0,144238),
+	(100,'138215039261',55,2,0,133809),
+	(101,'138215039267',27,2,2,138738),
+	(102,'138215043233',8,2,1,148881),
+	(103,'138215043230',14,2,3,128247),
+	(104,'138214989601',38,2,1,137863),
+	(105,'138215048526',29,2,0,149140),
+	(106,'138217218660',22,2,1,141114),
+	(107,'138217219452',16,2,3,140689);
+
+/*!40000 ALTER TABLE `tracking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`)
+VALUES
+	(1,'Julio','JChacon@hyfnlocal.com','$2y$10$OojIlac8tcRlxXuVPR5cleA2up26kmM3GQQdCKwY7JUvT6mvpvgwi','81rD0GLqZJHRFxEpqtm2zdlpY5jnjU6nqsHKpaGo7yB4kGdBVmfraVmMF6JE','2017-10-12 18:05:10','2017-10-12 18:05:10'),
+	(3,'admin','creativeproduction@hyfnlocal.com','$2y$10$sFJ.wc0GefP4FsM/eiCbh.na5IGvtBNr/X5uIaEtbXX.Fp.J/PBBu','59OcsI3dbrEH1hQFXY1TsHnSuP3sFHxapvzQFkCQysq0wxFSDs5QiJCmgIWQ','2017-10-19 14:54:14','2017-10-19 14:54:14'),
+	(4,'intercounty','intercounty@email.com','$2y$10$qcjEIrox2Rk7W4caSJD4wOwQsKvQUY0gqnebP4ShPmb1n8Q8l.xn.','8a3PHilU6Qh5e6OEm0mwLu2vpPoelCT2UTdV1c24WBlJt07GHpEYaNadnRTV','2017-10-19 20:59:51','2017-10-19 20:59:51');
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

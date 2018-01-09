@@ -4,123 +4,28 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('./bootstrap')
 
-// window.Vue = require('vue');
+window.Vue = require('vue')
 
-// import VueRouter  from 'vue-router'
-// import router     from './router'
-// import Vue        from 'vue'
+// Imports
+import Vue from 'vue'
+import Router from 'vue-router'
+import routes from './routes'
 
+Vue.use(Router)
 
-// Vue.use(VueRouter)
+// Components
+Vue.component('store-panel', require('./components/StorePanel.vue'))
+Vue.component('location-panel', require('./components/LocationPanel.vue'))
+Vue.component('campaign-panel', require('./components/CampaignPanel.vue'))
 
+// Instantiation
+new Vue({
+    el: '#app'
+})
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-// Vue.component('example-component', require('./components/Example.vue'));
-// Vue.component('favorite', require('./components/Favorite.vue'));
-// 
-// Vue.component('store-check', {
-//  props: [ 'store_id', 'campaign_id'],
-
-//  // data() {
-//  //  return {
-//  //      addStore: false;
-//  //  };
-//  // },
-
-//  template: `
-//      <input type="checkbox"  v-bind:id="'store_' + store_id" v-model="checked" v-on:change="updateData(item)">
-//  `,
-
-//  methods: {
-//      updateData(item) {
-
-//          // console.log(this.checked)
-//      }
-//  }
-// })
-// 
-// 
-// 
-// 
-// Vue.component('store-locations', {
-//   props:['address', 'phone'],
-//   template: `<div>
-//              <location v-for="loc in locations"></location>
-//              </div>
-//              `,
-
-//  data() {
-//      return {locations: [{item:'one'}, {item:'two'}]};
-//  }
-// });
-
-// Vue.component('location', {
-
-//   template: `
-//   <div class="form-group">
-//         <label for="logo">Address</label>
-//         <input class="form-control" placeholder="store address" name="address{{ $loop->iteration }}" type="text" value="{{ old('address.$loop->iteration',$loc->address) }}">
-//     </div>
-//     <div class="form-group">
-//         <label for="logo">Phone</label>
-//         <input class="form-control" placeholder="store phone" name="phone{{ $loop->iteration }}" type="text" value="{{ old('phone.$loop->iteration',$loc->phone) }}">
-//     </div>
-//   `
-
-// });
-
-// const router = new VueRouter({
-//   routes: [
-//     // dynamic segments start with a colon
-//     { path: '/stores/create', component: User }
-//   ]
-// })
-
-
-// const routes = [
-//     {path: '/stores/create', component: User}
-// ]
-
-
-
-// Vue.component('store-brand-component', require('./components/StoreBrand.vue'));
-
-// const app = new Vue({
-//     el: '#app'
-// });
-// 
-// const NotFound = { template: '<p>Page not found</p>' }
-// const Home = { template: '<p>home page</p>' }
-// const About = { template: '<p>about page</p>' }
-// const routes = {
-//   '/': Home,
-//   '/about': About
-// }
-// new Vue({
-//   el: '#app',
-//   data: {
-//     currentRoute: window.location.pathname
-//   },
-//   computed: {
-//     ViewComponent () {
-//       return routes[this.currentRoute] || NotFound
-//     }
-//   },
-//   render (h) { return h(this.ViewComponent) }
-// })
-// 
-// 
-// 
-// 
-
-
+// ================================
 
 $(document).ready(function() {
 
@@ -177,7 +82,7 @@ $(document).ready(function() {
                           event.preventDefault();
                         // event.stopPropagation();
                     }
-                    
+
                 }
             });
         });
@@ -232,7 +137,7 @@ function clearAllURLs(storeID){
 }
 
 function checkMessage(storeID) {
-   
+
     const parent = $('#store_'+storeID);
     const brandChkBoxs = parent.find('input.checkbox-brand-item:checkbox');
     const warning = parent.find('.brand-warning');
@@ -255,7 +160,7 @@ function activateBrands(parent) {
     const brandGroups = parent.find('.brand-group');
     brandGroups.each(function(idx, item) {
         // add listeners
-        
+
         $('.checkbox-brand-item', item).on("click", function(event) {
             const brandID = $(this).data('brand-id');
             const storeID = $(this).data('store-id');
@@ -281,7 +186,7 @@ function activateBrands(parent) {
                 apiCall(send, '/campaigns/'+ hyfn.currCamp +'/update');
                 checkMessage(storeID);
             }
-           
+
         });
 
         let oldValue = $('.ulrbox-item', item).val();
@@ -298,7 +203,7 @@ function activateBrands(parent) {
                 const send = { requester: 'exitURL', store: storeID, brand: brandID, action: 'urlexit', url: valElm };
                 apiCall(send, '/campaigns/'+ hyfn.currCamp +'/update');
             }
-            
+
         });
 
     })
@@ -320,7 +225,7 @@ function processCreativeID(json) {
     msg.removeClass('alert-success alert-danger');
     msg.text(json['message']);
 
-    if (json['status'] != 'OK') { 
+    if (json['status'] != 'OK') {
         msg.addClass('alert-danger');
         elm.val('');
         setTimeout(function() {
@@ -339,7 +244,7 @@ function processCreativeID(json) {
 
 function processBrandCheck(json){
     const elm = $('#brandName_' + json['request']['store'] + '-'+json['request']['brand']);
-    if (json['status'] != 'OK') { 
+    if (json['status'] != 'OK') {
       elm.parent().css('color', 'red');
       setTimeout(function() {
             elm.parent().css('color', '');
@@ -357,7 +262,7 @@ function processBrandCheck(json){
 function processExitURL(json){
      const elm = $('#urlExit_' + json['request']['store'] + '-'+json['request']['brand']);
 
-     if (json['status'] != 'OK') { 
+     if (json['status'] != 'OK') {
       elm.css('background-color', '#f2dede');
       setTimeout(function() {
             elm.css('background-color', '');
@@ -372,12 +277,12 @@ function processExitURL(json){
 }
 
 function processStoreCheck(json){
-    
+
     const elm = $('#creativeID_' + json['request']['store']);
 
     // const msg = $('#creativeIDmsg_' + json['request']['store']);
     // console.log(elm.parent())
-    if (json['status'] != 'OK') { 
+    if (json['status'] != 'OK') {
       //  elm.parent().css('background-color', '#f2dede');
       // setTimeout(function() {
       //        elm.parent().css('background-color', '');

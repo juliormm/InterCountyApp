@@ -101,7 +101,8 @@
                 </div>
             </div>
         </nav>
-        @yield('content') @include ('footer')
+        @yield('content')
+        @include ('footer')
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
